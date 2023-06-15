@@ -1,15 +1,16 @@
-import React from 'react';
+import React, {useState} from 'react';
 import style from './Posts.module.css'
 import {Poststype} from "../../Data/Types";
 
 export type PostsPropsType = {
-    profile: Poststype[]
+    posts: Poststype[]
 }
 
 export const Posts = (props: PostsPropsType) => {
+
     return (
         <div>
-            {props.profile.map(el=>{
+            {props.posts.map(el=>{
                 return(
                     <div className={style.post}>
                         <div>
