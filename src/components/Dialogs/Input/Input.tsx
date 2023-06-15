@@ -1,6 +1,7 @@
 import style from "./Input.module.css"
 import React, {ChangeEvent} from "react";
-import {ActionTypes, addMessageAC, addMessageTextAC} from "../../Data/Store";
+import {ActionTypes} from "../../Data/Types";
+import {addMessageAC, addMessageTextAC} from "../../Data/DialogsReducer";
 
 export type InputPropsType = {
     value: string

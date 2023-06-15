@@ -1,6 +1,6 @@
 import React from 'react';
 import style from './Posts.module.css'
-import {Poststype} from "../../Data/Store";
+import {Poststype} from "../../Data/Types";
 
 export type PostsPropsType = {
     profile: Poststype[]

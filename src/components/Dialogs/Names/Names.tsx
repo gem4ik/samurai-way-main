@@ -1,10 +1,10 @@
 import style from "./Names.module.css"
 import {FC} from "react";
 import {NavLink} from "react-router-dom";
-import {DialogsType} from "../../Data/Store";
+import {DialogsType} from "../../Data/Types";
 
 type NamesPropsType= {
-    dialogs: Array<DialogsType>
+    dialogs: DialogsType[]
 }
 export const Names: FC<NamesPropsType> = (dialogs) => {
     return (

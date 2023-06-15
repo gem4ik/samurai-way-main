@@ -1,8 +1,9 @@
 import style from "./Profile.module.css"
 import React, {ChangeEvent, FC} from "react";
-import {ActionTypes, addCurrentPostTextAC, addPostAC, ProfileType} from "../Data/Store";
 import {Posts} from "./Posts/Posts";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
+import {ActionTypes, ProfileType} from "../Data/Types";
+import {addCurrentPostTextAC, addPostAC} from "../Data/ProfileReducer";
 
 type ProfilePropsType = {
     profile: ProfileType

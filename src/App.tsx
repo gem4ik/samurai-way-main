@@ -8,10 +8,12 @@ import {News} from "./components/News/News";
 import {Settings} from "./components/Settings/Settings";
 import {Dialogs} from "./components/Dialogs/Dialogs";
 import {Profile} from "./components/Profile/Profile";
-import {StoreType} from "./components/Data/Store";
+import {ActionsType} from "./components/Data/redux";
+import {ActionTypes} from "./components/Data/Types";
 
 type AppPropsType = {
-    Store: StoreType
+    Store: ActionsType
+    dispatch: (action: ActionTypes)=> void
 }
 
 function App(props: AppPropsType) {
@@ -25,15 +27,15 @@ function App(props: AppPropsType) {
                 <div className={style.content}>
                     <Route path="/profile"
                            render={() => <Profile
-                               profile={props.Store.getState().Profile}
-                               dispatch={props.Store.dispatch.bind(props.Store)}
+                               profile={props.Store.profilePage}
+                               dispatch={props.dispatch.bind(props.Store)}
                            />}>
                     </Route>
                     <Route
                         path="/dialogs"
                         render={() => <Dialogs
-                            message={props.Store.getState().Message}
-                            dispatch={props.Store.dispatch.bind(props.Store)}
+                            message={props.Store.dialogsPage}
+                            dispatch={props.dispatch.bind(props.Store)}
                         />}>
                     </Route>
                     <Route path="/music"

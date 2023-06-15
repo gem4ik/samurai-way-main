@@ -1,9 +1,9 @@
 import style from "./Message.module.css"
 import {FC} from "react";
-import {MessagesType} from "../../Data/Store";
+import {MessagesType} from "../../Data/Types";
 
 type DialogsPropsType = {
-    messages: Array<MessagesType>
+    messages: MessagesType[]
 }
 export const Message : FC<DialogsPropsType> = (messages) => {
     return (
