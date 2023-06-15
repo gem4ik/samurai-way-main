@@ -29,7 +29,7 @@ export const Profile: FC<ProfilePropsType> = (props) => {
                         className={style.button}>add post</button>
             </div>
 
-                <Posts profile={props.profile.posts}/>
+                <Posts posts={props.profile.posts}/>
         </div>
     )
 }

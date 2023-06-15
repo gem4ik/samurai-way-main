@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import style from './Posts.module.css'
 import {Poststype} from "../../Data/Types";
 

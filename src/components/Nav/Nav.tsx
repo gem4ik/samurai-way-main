@@ -12,7 +12,7 @@ export function Nav() {
                     className={style.item}>Messages</NavLink>
                 <NavLink
                     to="/friends"
-                    className={style.item}>Friends</NavLink>
+                    className={style.item}>News</NavLink>
                 <NavLink
                     to="/music"
                     className={style.item}>Music</NavLink>
