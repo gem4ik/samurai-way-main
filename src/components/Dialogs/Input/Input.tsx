@@ -1,18 +1,17 @@
 import style from "./Input.module.css"
 import React, {ChangeEvent} from "react";
-import {ActionTypes} from "../../Data/Types";
-import {addMessageAC, addMessageTextAC} from "../../Data/DialogsReducer";
 
 export type InputPropsType = {
     value: string
-    dispatch: (action: ActionTypes) => void
+    onChangeHandler: (title: string)=> void
+    onClickHandler: ()=> void
 }
 
 export const Input = (props: InputPropsType) => {
 
     const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
         if (e.currentTarget.value) {
-            props.dispatch(addMessageTextAC(e.currentTarget.value))
+            props.onChangeHandler(e.currentTarget.value)
         }
     }
 
@@ -20,12 +19,12 @@ export const Input = (props: InputPropsType) => {
         <div className={style.inputArea}>
                 <textarea
                     value={props.value}
-                    onChange={(e)=>{onChangeHandler(e)}}
+                    onChange={onChangeHandler}
                     className={style.textarea}
                           placeholder="your message">
             </textarea>
             <button
-                onClick={()=>{props.dispatch(addMessageAC())}}
+                onClick={props.onClickHandler}
                 className={style.button}>send</button>
         </div>
     )

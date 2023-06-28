@@ -1,4 +1,3 @@
-
 import {v1} from "uuid";
 import {ActionTypes, ProfileType} from "./Types";
 
@@ -27,7 +26,7 @@ export const ProfileReducer = (state: ProfileType=InitialProfile, action: Action
         }
         default: return state
     }
-};
+}
 
 export const addCurrentPostTextAC = (newPostText: string) => {
     return {

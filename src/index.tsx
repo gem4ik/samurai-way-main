@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import {ActionsType, Store} from "./components/Data/redux";
+import {ActionsType, Store} from "./Data/redux";
 
 export const renderTree =(store: ActionsType)=> {
     ReactDOM.render(
@@ -12,6 +12,7 @@ export const renderTree =(store: ActionsType)=> {
         document.getElementById('root')
     );
 }
+
 Store.subscribe(()=>{
     let state = Store.getState()
     renderTree(state)

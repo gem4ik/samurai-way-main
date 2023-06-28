@@ -1,7 +1,7 @@
 import style from "./Names.module.css"
 import {FC} from "react";
 import {NavLink} from "react-router-dom";
-import {DialogsType} from "../../Data/Types";
+import {DialogsType} from "../../../Data/Types";
 
 type NamesPropsType= {
     dialogs: DialogsType[]
