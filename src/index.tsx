@@ -8,7 +8,8 @@ export const renderTree =(store: ActionsType)=> {
     ReactDOM.render(
         <App Store={Store.getState()}
              dispatch={Store.dispatch.bind(Store)}
-        />,
+        />
+        ,
         document.getElementById('root')
     );
 }
