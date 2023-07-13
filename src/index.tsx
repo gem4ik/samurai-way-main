@@ -2,20 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import {ActionsType, Store} from "./Data/redux";
+import {store} from "./Data/redux";
+import {Provider} from "react-redux";
 
-export const renderTree =(store: ActionsType)=> {
+
     ReactDOM.render(
-        <App Store={Store.getState()}
-             dispatch={Store.dispatch.bind(Store)}
-        />
+        <Provider store={store}>
+            <App />
+        </Provider>
         ,
         document.getElementById('root')
     );
-}
-
-Store.subscribe(()=>{
-    let state = Store.getState()
-    renderTree(state)
-})
-renderTree(Store.getState());

@@ -25,14 +25,14 @@ const InitialDialogs = {
 export const DialogsReducer = (state: MessageType = InitialDialogs, action: ActionTypes):MessageType => {
     switch (action.type) {
         case 'ADD-CURRENT-MESSAGE-TEXT' : {
-          state.newMessageText = action.payload.newMessageText
-            return state
+            return {...state, newMessageText: action.payload.newMessageText}
         }
         case 'ADD-MESSAGE' : {
             if (state.newMessageText !== '') {
                 let newMessage = {id: v1(), message: state.newMessageText}
-                state.messages.push(newMessage)
+                const newState = {...state, messages: [...state.messages, newMessage]}
                 state.newMessageText = ''
+                return newState
             }
             return state
         }

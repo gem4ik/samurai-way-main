@@ -13,14 +13,14 @@ const InitialProfile = {
 export const ProfileReducer = (state: ProfileType=InitialProfile, action: ActionTypes):ProfileType => {
     switch (action.type) {
         case 'ADD-CURRENT-POST-TEXT' : {
-            state.newPostText = action.payload.newPostText
-            return state
+            return {...state, newPostText: action.payload.newPostText}
         }
         case 'ADD-POST' : {
             if (state.newPostText !== '') {
                 let newPost = {id: v1(), post: state.newPostText, likeValue: 0}
-                state.posts.unshift(newPost)
+                let newState = {...state, posts: [newPost, ...state.posts]}
                 state.newPostText = ''
+                return newState
             }
             return state
         }

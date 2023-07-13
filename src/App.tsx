@@ -6,17 +6,10 @@ import {BrowserRouter, Route} from "react-router-dom";
 import {Music} from "./components/Music/Music";
 import {News} from "./components/News/News";
 import {Settings} from "./components/Settings/Settings";
-import {DialogsContainer} from "./components/Dialogs/Dialogs";
-import {ProfileContainer} from "./components/Profile/Profile";
-import {ActionsType} from "./Data/redux";
-import {ActionTypes} from "./Data/Types";
+import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
+import {ProfileContainer} from "./components/Profile/ProfileContainer";
 
-type AppPropsType = {
-    Store: ActionsType
-    dispatch: (action: ActionTypes) => void
-}
-
-function App(props: AppPropsType) {
+function App() {
     return (
         <BrowserRouter>
             <div className={style.appWrapper}>
@@ -26,17 +19,11 @@ function App(props: AppPropsType) {
                 </div>
                 <div className={style.content}>
                     <Route path="/profile" render={() =>
-                        <ProfileContainer
-                            profile={props.Store.profilePage}
-                            dispatch={props.dispatch}
-                        />}>
+                        <ProfileContainer />}>
                     </Route>
                     <Route
                         path="/dialogs" render={() =>
-                        <DialogsContainer
-                            message={props.Store.dialogsPage}
-                            dispatch={props.dispatch}
-                        />}>
+                        <DialogsContainer />}>
                     </Route>
                     <Route path="/music" render={() => <Music/>}> </Route>
                     <Route path="/news" render={() => <News/>}> </Route>

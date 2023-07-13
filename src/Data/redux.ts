@@ -9,4 +9,4 @@ const reducers = combineReducers({
 
 export type ActionsType = ReturnType<typeof reducers>
 
-export const Store = createStore(reducers)
+export const store = createStore(reducers)
