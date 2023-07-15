@@ -29,10 +29,7 @@ export const DialogsReducer = (state: MessageType = InitialDialogs, action: Acti
         }
         case 'ADD-MESSAGE' : {
             if (state.newMessageText !== '') {
-                let newMessage = {id: v1(), message: state.newMessageText}
-                const newState = {...state, messages: [...state.messages, newMessage]}
-                state.newMessageText = ''
-                return newState
+                return {...state,messages:[...state.messages,{id: v1(), message: state.newMessageText}], newMessageText:""}
             }
             return state
         }

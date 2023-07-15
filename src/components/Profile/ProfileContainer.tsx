@@ -1,7 +1,7 @@
 import {ChangeEvent} from "react";
 import {ProfileType} from "../../Data/Types";
 import {addCurrentPostTextAC, addPostAC} from "../../Data/ProfileReducer";
-import {Profile} from "./ProfileInfo/Profile";
+import {Profile} from "./Profile";
 import {connect} from "react-redux";
 import {ActionsType} from "../../Data/redux";
 import {Dispatch} from "redux";
@@ -10,17 +10,14 @@ import {Dispatch} from "redux";
 type mapStateToPropsType = {
     profile: ProfileType
 }
-
 type mapDispatchToPropsType = {
     onChangeHandler: (e: ChangeEvent<HTMLTextAreaElement>)=> void
     onClickHandler: ()=> void
 }
-
 export type ProfilePropsType = mapStateToPropsType & mapDispatchToPropsType
 
 
 function mapStateToProps (state: ActionsType): mapStateToPropsType {
-    debugger
     return {
         profile: state.profilePage
     }
@@ -28,7 +25,6 @@ function mapStateToProps (state: ActionsType): mapStateToPropsType {
 function mapDispatchToProps (dispatch: Dispatch): mapDispatchToPropsType {
     return {
         onChangeHandler: (e: ChangeEvent<HTMLTextAreaElement>) => {
-            debugger
             if (e.currentTarget.value) {
                 dispatch(addCurrentPostTextAC(e.currentTarget.value))
             }
@@ -39,4 +35,7 @@ function mapDispatchToProps (dispatch: Dispatch): mapDispatchToPropsType {
     }
 }
 
-export const ProfileContainer = connect(mapStateToProps, mapDispatchToProps)(Profile)
+export const ProfileContainer = connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Profile)

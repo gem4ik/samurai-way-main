@@ -18,9 +18,7 @@ export const ProfileReducer = (state: ProfileType=InitialProfile, action: Action
         case 'ADD-POST' : {
             if (state.newPostText !== '') {
                 let newPost = {id: v1(), post: state.newPostText, likeValue: 0}
-                let newState = {...state, posts: [newPost, ...state.posts]}
-                state.newPostText = ''
-                return newState
+                return {...state, posts: [newPost, ...state.posts], newPostText: ''}
             }
             return state
         }

@@ -1,11 +1,13 @@
 import {addCurrentPostTextAC, addPostAC} from "./ProfileReducer";
 import {addMessageAC, addMessageTextAC} from "./DialogsReducer";
+import {followAC} from "./UsersReducer";
 
 export type  ActionTypes =
     ReturnType<typeof addCurrentPostTextAC>
     | ReturnType<typeof addPostAC>
     | ReturnType<typeof addMessageTextAC>
     | ReturnType<typeof addMessageAC>
+    | ReturnType<typeof followAC>
 
 export type Poststype = {
     id: string
@@ -39,4 +41,20 @@ export type StoreType = {
     subscribe: (callback: () => void) => void
     getState: () => StateType
     dispatch: (action: ActionTypes) => void
+}
+export type LocationType = {
+    city: string;
+    country: string;
+};
+
+export type FriendsType = {
+    id: string;
+    photoUrl: string;
+    followed: boolean;
+    fullName: string;
+    status: string;
+    location: LocationType;
+};
+export type UsersType = {
+    users: FriendsType[]
 }

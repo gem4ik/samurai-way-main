@@ -1,8 +1,8 @@
 import React from 'react';
-import {ProfileInfo} from "./ProfileInfo";
-import {AddPostField} from "../AddPostField/AddPostField";
-import {Posts} from "../Posts/Posts";
-import {ProfilePropsType} from "../ProfileContainer";
+import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
+import {AddPostField} from "./AddPostField/AddPostField";
+import {Posts} from "./Posts/Posts";
+import {ProfilePropsType} from "./ProfileContainer";
 
 export const Profile = (props: ProfilePropsType) => {
     return (

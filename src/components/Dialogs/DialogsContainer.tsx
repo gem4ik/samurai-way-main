@@ -1,20 +1,18 @@
-import {addMessageAC, addMessageTextAC} from "../../Data/DialogsReducer";
-import {Dialogs} from "./Dialogs";
 import {connect} from "react-redux";
-import {MessageType} from "../../Data/Types";
 import {Dispatch} from "redux";
 import {ActionsType} from "../../Data/redux";
+import {addMessageAC, addMessageTextAC} from "../../Data/DialogsReducer";
+import {Dialogs} from "./Dialogs";
+import {MessageType} from "../../Data/Types";
 
 
 type mapStateToPropsType = {
     message: MessageType
 }
-
 type mapDispatchToPropsType = {
     onChangeHandler: (title: string)=> void
     onClickHandler: () => void
 }
-
 export type DialogsPropsType = mapStateToPropsType & mapDispatchToPropsType
 
 function mapStateToProps (state: ActionsType): mapStateToPropsType {
@@ -33,4 +31,4 @@ function mapDispatchToProps (dispatch: Dispatch): mapDispatchToPropsType {
     }
 }
 
-export const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs)
+export const DialogsContainer = connect(mapStateToProps,mapDispatchToProps)(Dialogs)

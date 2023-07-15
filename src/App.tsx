@@ -6,8 +6,9 @@ import {BrowserRouter, Route} from "react-router-dom";
 import {Music} from "./components/Music/Music";
 import {News} from "./components/News/News";
 import {Settings} from "./components/Settings/Settings";
-import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 import {ProfileContainer} from "./components/Profile/ProfileContainer";
+import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
+import {UsersContainer} from "./components/Users/UsersContainer";
 
 function App() {
     return (
@@ -24,6 +25,10 @@ function App() {
                     <Route
                         path="/dialogs" render={() =>
                         <DialogsContainer />}>
+                    </Route>
+                    <Route
+                        path="/friends" render={() =>
+                        <UsersContainer />}>
                     </Route>
                     <Route path="/music" render={() => <Music/>}> </Route>
                     <Route path="/news" render={() => <News/>}> </Route>

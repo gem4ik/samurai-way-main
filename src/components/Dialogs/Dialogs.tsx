@@ -7,6 +7,7 @@ import {DialogsPropsType} from "./DialogsContainer";
 
 
 export const Dialogs = (props: DialogsPropsType) => {
+
     return (
         <div className={style.dialogs}>
             <Names dialogs={props.message.dialogs} />

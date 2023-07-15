@@ -1,0 +1,26 @@
+.friendsPhoto {
+    height: 100px;
+}
+.FriendWrapper {
+    display: flex;
+    flex-wrap: wrap;
+}
+.users {
+    display: flex;
+    flex-wrap: wrap;
+}
+.followButton {
+    font-size: 16px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #5181b8;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100px;
+}
+
+.followButton:hover {
+    background-color: #2c4d70;
+}
