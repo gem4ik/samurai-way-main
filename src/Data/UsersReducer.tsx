@@ -1,33 +1,40 @@
-import {ActionTypes, FriendsType, UsersType} from "./Types";
+import {ActionTypes, UserType} from "./Types";
 
 let initialState = {
-    users: [] as unknown as FriendsType[],
+    users: [],
     pageSize: 2,
     totalUsersCount: 0,
     pageCount: 1,
     followed: false,
 }
 
-    export const UsersReducer = (state: UsersType = initialState, action: ActionTypes) => {
-    debugger
-        switch (action.type) {
-            case "SET-USERS": {
-                return {...action.payload}
-            }
-            default:
-                return state
-        }
-    };
-    export const followAC = (value: boolean, id: number) => {
 
-        return {
-            type: "SWITCH-FOLLOW",
-            payload: {value, id}
-        } as const
+export type initialUsersStateType = {
+    users: UserType[]
+    pageSize: number
+    totalUsersCount: number
+    pageCount: number
+    followed: boolean
+}
+
+export const UsersReducer = (state: initialUsersStateType = initialState, action: ActionTypes) => {
+    switch (action.type) {
+        case "SET-USERS": {
+            return {...state, users: [...action.payload.users]}
+        }
+        default:
+            return state
     }
-    export const setUsersAC = (users: UsersType) => {
-        return {
-            type: "SET-USERS",
-            payload: {users}
-        } as const
-    }
+};
+export const followAC = (value: boolean, id: number) => {
+    return {
+        type: "SWITCH-FOLLOW",
+        payload: {value, id}
+    } as const
+}
+export const setUsersAC = (users: UserType[]) => {
+    return {
+        type: "SET-USERS",
+        payload: {users}
+    } as const
+}

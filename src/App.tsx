@@ -27,7 +27,7 @@ function App() {
                         <DialogsContainer />}>
                     </Route>
                     <Route
-                        path="/friends" render={() =>
+                        path="/users" render={() =>
                         <UsersContainer />}>
                     </Route>
                     <Route path="/music" render={() => <Music/>}> </Route>

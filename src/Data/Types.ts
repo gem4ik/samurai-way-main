@@ -32,33 +32,24 @@ export type MessageType = {
     messages: Array<MessagesType>
     newMessageText: string
 }
-export type StateType = {
-    Profile: ProfileType
-    Message: MessageType
-}
-export type StoreType = {
-    _State: StateType
-    renderTree: () => void
-    subscribe: (callback: () => void) => void
-    getState: () => StateType
-    dispatch: (action: ActionTypes) => void
-}
+
+
 export type photosType = {
-    "small": null|any,
-    "large": null|any
+    "small": null | string,
+    "large": null | string
+}
+export type UserType = {
+    "name": string
+    "id": number
+    "uniqueUrlName": null | any
+    "photos": photosType
+    "status": null | any,
+    "followed": boolean
+};
+
+export type UsersType = {
+    items: UserType[],
+    totalCount: number
+    error: null | string
 }
 
-export type FriendsType = {
-        "name": string
-        "id": number
-        "photos": photosType
-        "status": null|any,
-        "followed": boolean
-};
-export type UsersType = {
-    users: FriendsType[],
-    pageSize: number,
-    totalUsersCount: number,
-    pageCount: number,
-    followed: boolean,
-}

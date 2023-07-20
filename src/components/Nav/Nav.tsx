@@ -11,8 +11,8 @@ export function Nav() {
                     to="/dialogs"
                     className={style.item}>Messages</NavLink>
                 <NavLink
-                    to="/friends"
-                    className={style.item}>Friends</NavLink>
+                    to="/users"
+                    className={style.item}>Users</NavLink>
                 <NavLink
                     to="/music"
                     className={style.item}>Music</NavLink>

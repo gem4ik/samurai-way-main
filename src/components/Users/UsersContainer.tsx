@@ -2,7 +2,7 @@ import {connect} from "react-redux";
 import {Dispatch} from "redux";
 import {ActionsType} from "../../Data/redux";
 import {Users} from "./Users";
-import {FriendsType} from "../../Data/Types";
+import {UserType} from "../../Data/Types";
 import {followAC, setUsersAC} from "../../Data/UsersReducer";
 import React from "react";
 import axios from "axios";
@@ -14,8 +14,8 @@ export type UsersAPIType = {
 
 class UsersAPI extends React.Component<UsersPropsType, UsersAPIType> {
     componentDidMount() {
-        axios.get<any>('https://social-network.samuraijs.com/api/1.0/users')
-            .then(res => setUsersAC(res.data.items))
+        axios.get<any>('https://social-network.samuraijs.com/api/1.0/users?count=100')
+            .then(res => this.props.setUsers(res.data.items))
     }
 
     render() {
@@ -25,16 +25,17 @@ class UsersAPI extends React.Component<UsersPropsType, UsersAPIType> {
 }
 
 type mapStateToPropsType = {
-    users: FriendsType[]
+    users: UserType[]
 }
 type mapDispatchToPropsType = {
     setFollow: (value: boolean, id: number) => void
+    setUsers: (items: UserType[])=> void
 }
 export type UsersPropsType = mapStateToPropsType & mapDispatchToPropsType
 
 function mapStateToProps(state: ActionsType): mapStateToPropsType {
     return {
-        users: state.usersPage
+        users: state.usersPage.users
     }
 }
 
@@ -42,6 +43,9 @@ function mapDispatchToProps(dispatch: Dispatch): mapDispatchToPropsType {
     return {
         setFollow: (value: boolean, id: number) => {
             dispatch(followAC(value, id))
+        },
+        setUsers: (items) => {
+            dispatch(setUsersAC(items))
         }
     }
 }
