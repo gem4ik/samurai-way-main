@@ -3,7 +3,7 @@ import {Dispatch} from "redux";
 import {ActionsType} from "../../Data/redux";
 import {Users} from "./Users";
 import {UserType} from "../../Data/Types";
-import {followAC, setUsersAC} from "../../Data/UsersReducer";
+import {followAC, setCurrentPageAC, setUsersAC, setUsersTotalCountAC} from "../../Data/UsersReducer";
 import React from "react";
 import axios from "axios";
 
@@ -14,28 +14,43 @@ export type UsersAPIType = {
 
 class UsersAPI extends React.Component<UsersPropsType, UsersAPIType> {
     componentDidMount() {
-        axios.get<any>('https://social-network.samuraijs.com/api/1.0/users?count=100')
-            .then(res => this.props.setUsers(res.data.items))
+        axios.get<any>(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}&page=${this.props.currentPage}`)
+            .then(res => {
+                this.props.setUsers(res.data.items)
+                this.props.setUsersTotalCount(res.data.totalCount)
+            })
     }
 
     render() {
         return <Users user={this.props.users}
+                      pageSize={this.props.pageSize}
+                      currentPage={this.props.currentPage}
+                      totalUsersCount={this.props.totalUsersCount}
+                      setCurrentPage={this.props.setCurrentPage}
                       setFollow={this.props.setFollow}/>
     }
 }
 
 type mapStateToPropsType = {
     users: UserType[]
+    pageSize: number
+    totalUsersCount: number
+    currentPage: number
 }
 type mapDispatchToPropsType = {
     setFollow: (value: boolean, id: number) => void
     setUsers: (items: UserType[])=> void
+    setUsersTotalCount: (totalUsersCount: number)=> void
+    setCurrentPage: (currentPage: number) => void
 }
 export type UsersPropsType = mapStateToPropsType & mapDispatchToPropsType
 
 function mapStateToProps(state: ActionsType): mapStateToPropsType {
     return {
-        users: state.usersPage.users
+        users: state.usersPage.users,
+        pageSize: state.usersPage.pageSize,
+        totalUsersCount: state.usersPage.totalUsersCount,
+        currentPage: state.usersPage.currentPage,
     }
 }
 
@@ -46,6 +61,12 @@ function mapDispatchToProps(dispatch: Dispatch): mapDispatchToPropsType {
         },
         setUsers: (items) => {
             dispatch(setUsersAC(items))
+        },
+        setUsersTotalCount: (totalUsersCount: number)=> {
+            dispatch(setUsersTotalCountAC(totalUsersCount))
+        },
+        setCurrentPage: (currentPage: number)=> {
+            dispatch(setCurrentPageAC(currentPage))
         }
     }
 }

@@ -26,7 +26,28 @@
 .avatar {
     width: 100px;
 }
-.users {
+.usersWrapper {
+    display: flex;
+    flex-direction: column;
+
+}
+.pageButton {
+    font-size: 14px;
+    padding: 5px;
+    margin: 2px;
+    height: max-content;
+    border: none;
+    border-radius: 5px;
+    background-color: #5181b8;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: max-content;
+}
+.pageButton:hover {
+    background-color: #2c4d70;
+}
+.users{
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
