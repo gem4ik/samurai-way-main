@@ -1,6 +1,8 @@
 import React from 'react';
 import s from './Users.module.css'
 import {UserType} from "../../Data/Types";
+import user from "./user.png"
+import {Preloader} from "../common/preloader/Preloader";
 
 export type UsersCompPropsType = {
     user: UserType[]
@@ -9,6 +11,7 @@ export type UsersCompPropsType = {
     totalUsersCount: number
     setCurrentPage: (currentPage: number) => void
     currentPage: number
+    isLoading: boolean
 }
 export const Users = (props: UsersCompPropsType) => {
     let pages = []
@@ -31,17 +34,24 @@ export const Users = (props: UsersCompPropsType) => {
                 })}
             </div>
             <div className={s.users}>
-                {props.user.map(u => {
-                    return <div key={u.id} className={s.card}>
-                        <img
-                            className={s.avatar}
-                            src={`${u.photos.large ? u.photos.large : u.photos.small}`}
-                            alt="avatar"/>
-                        {u.name}
+                <div className={s.cardWrapper}>
+                    {props.user.map(u => {
+                        return <div key={u.id} className={s.card}>
 
-                        <button className={s.followButton}>{u.followed ? "followed" : "unfollowed"}</button>
-                    </div>
-                })}
+                            {props.isLoading ? <Preloader/> : <div>
+                                {u.photos.large || u.photos.small ? <img
+                                        className={s.avatar}
+                                        src={`${u.photos.large ? u.photos.large : u.photos.small}`}
+                                        alt="avatar"/> :
+                                    <img className={s.zaglushkaUser} src={user} alt="zaglushka"/>
+                                }
+                            </div> }
+
+                            {u.name}
+                            <button className={s.followButton}>{u.followed ? "followed" : "unfollowed"}</button>
+                        </div>
+                    })}
+                </div>
             </div>
         </div>
     )

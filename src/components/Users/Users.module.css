@@ -52,3 +52,11 @@
     flex-wrap: wrap;
     gap: 20px;
 }
+.cardWrapper{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+.zaglushkaUser{
+    width: 100px;
+}

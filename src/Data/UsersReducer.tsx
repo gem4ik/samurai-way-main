@@ -6,7 +6,8 @@ let initialState = {
     totalUsersCount: 0,
     pageCount: 1,
     followed: false,
-    currentPage: 1
+    currentPage: 1,
+    isLoading: false,
 }
 
 
@@ -17,6 +18,7 @@ export type initialUsersStateType = {
     pageCount: number
     followed: boolean
     currentPage: number
+    isLoading: boolean
 }
 
 export const UsersReducer = (state: initialUsersStateType = initialState, action: ActionTypes) => {
@@ -29,6 +31,9 @@ export const UsersReducer = (state: initialUsersStateType = initialState, action
         }
         case "SET-CURRENT-PAGE":{
             return {...state, currentPage: action.payload.currentPage}
+        }
+        case "SET-IS-LOADING": {
+            return {...state, isLoading: action.payload.isLoading}
         }
         default:
             return state
@@ -56,5 +61,11 @@ export const setCurrentPageAC = (currentPage: number) => {
     return {
         type: "SET-CURRENT-PAGE",
         payload: {currentPage}
+    } as const
+}
+export const setIsLoadingAC = (isLoading: boolean) => {
+    return {
+        type: "SET-IS-LOADING",
+        payload: {isLoading}
     } as const
 }

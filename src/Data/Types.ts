@@ -1,6 +1,6 @@
 import {addCurrentPostTextAC, addPostAC} from "./ProfileReducer";
 import {addMessageAC, addMessageTextAC} from "./DialogsReducer";
-import {followAC, setCurrentPageAC, setUsersAC, setUsersTotalCountAC} from "./UsersReducer";
+import {followAC, setCurrentPageAC, setIsLoadingAC, setUsersAC, setUsersTotalCountAC} from "./UsersReducer";
 
 export type  ActionTypes =
     ReturnType<typeof addCurrentPostTextAC>
@@ -11,6 +11,7 @@ export type  ActionTypes =
     | ReturnType<typeof setUsersAC>
     | ReturnType<typeof setUsersTotalCountAC>
     | ReturnType<typeof setCurrentPageAC>
+    | ReturnType<typeof setIsLoadingAC>
 
 export type Poststype = {
     id: string
