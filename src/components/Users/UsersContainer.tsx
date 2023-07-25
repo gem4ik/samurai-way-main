@@ -21,12 +21,20 @@ class UsersAPI extends React.Component<UsersPropsType, UsersAPIType> {
             })
     }
 
+    onPageChange = (pageNumber: number) => {
+        this.props.setCurrentPage(pageNumber)
+        axios.get<any>(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}&page=${pageNumber}`)
+            .then(res => {
+                this.props.setUsers(res.data.items)
+            })
+    }
+
     render() {
         return <Users user={this.props.users}
                       pageSize={this.props.pageSize}
                       currentPage={this.props.currentPage}
                       totalUsersCount={this.props.totalUsersCount}
-                      setCurrentPage={this.props.setCurrentPage}
+                      setCurrentPage={this.onPageChange}
                       setFollow={this.props.setFollow}/>
     }
 }
@@ -39,8 +47,8 @@ type mapStateToPropsType = {
 }
 type mapDispatchToPropsType = {
     setFollow: (value: boolean, id: number) => void
-    setUsers: (items: UserType[])=> void
-    setUsersTotalCount: (totalUsersCount: number)=> void
+    setUsers: (items: UserType[]) => void
+    setUsersTotalCount: (totalUsersCount: number) => void
     setCurrentPage: (currentPage: number) => void
 }
 export type UsersPropsType = mapStateToPropsType & mapDispatchToPropsType
@@ -62,10 +70,10 @@ function mapDispatchToProps(dispatch: Dispatch): mapDispatchToPropsType {
         setUsers: (items) => {
             dispatch(setUsersAC(items))
         },
-        setUsersTotalCount: (totalUsersCount: number)=> {
+        setUsersTotalCount: (totalUsersCount: number) => {
             dispatch(setUsersTotalCountAC(totalUsersCount))
         },
-        setCurrentPage: (currentPage: number)=> {
+        setCurrentPage: (currentPage: number) => {
             dispatch(setCurrentPageAC(currentPage))
         }
     }

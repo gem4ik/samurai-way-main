@@ -6,7 +6,7 @@ let initialState = {
     totalUsersCount: 0,
     pageCount: 1,
     followed: false,
-    currentPage: 6
+    currentPage: 1
 }
 
 

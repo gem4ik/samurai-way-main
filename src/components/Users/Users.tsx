@@ -13,11 +13,12 @@ export type UsersCompPropsType = {
 export const Users = (props: UsersCompPropsType) => {
     let pages = []
     let pagesCount = Math.ceil(props.totalUsersCount/props.pageSize)
-    for (let i=1;i<=pagesCount;i++) {
+    for (let i=1; i <=pagesCount; i++) {
         if(pages.length < 10) {
             pages.push(i)
         }
     }
+
     return (
         <div className={s.usersWrapper}>
             <div className={s.pagination}>
