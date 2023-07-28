@@ -1,5 +1,5 @@
 import {v1} from "uuid";
-import {ActionTypes, ProfileType} from "./Types";
+import {ActionTypes, ProfileType, UserProfileType} from "./Types";
 
 const InitialProfile = {
     posts: [
@@ -7,7 +7,8 @@ const InitialProfile = {
         {id: v1(), post: "It's my first post", likeValue: 4},
         {id: v1(), post: "It's my first post", likeValue: 7}
     ],
-    newPostText: ''
+    newPostText: '',
+    profile: null
 }
 
 export const ProfileReducer = (state: ProfileType=InitialProfile, action: ActionTypes):ProfileType => {
@@ -22,18 +23,28 @@ export const ProfileReducer = (state: ProfileType=InitialProfile, action: Action
             }
             return state
         }
+        case 'SET-USER-PROFILE': {
+            debugger
+            return {...state, profile: {...action.payload.userProfile}}
+        }
         default: return state
     }
 }
 
-export const addCurrentPostTextAC = (newPostText: string) => {
+export const addCurrentPostText = (newPostText: string) => {
     return {
         type: 'ADD-CURRENT-POST-TEXT',
         payload: {newPostText}
     } as const
 }
-export const addPostAC = () => {
+export const addPost = () => {
     return {
         type: 'ADD-POST'
+    } as const
+}
+export const setUserProfile = (userProfile: UserProfileType) => {
+    return {
+        type: 'SET-USER-PROFILE',
+        payload: {userProfile}
     } as const
 }

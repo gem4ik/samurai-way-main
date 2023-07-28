@@ -63,7 +63,7 @@ export const setCurrentPageAC = (currentPage: number) => {
         payload: {currentPage}
     } as const
 }
-export const setIsLoadingAC = (isLoading: boolean) => {
+export const setIsLoading = (isLoading: boolean) => {
     return {
         type: "SET-IS-LOADING",
         payload: {isLoading}

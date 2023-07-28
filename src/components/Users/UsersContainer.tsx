@@ -3,7 +3,7 @@ import {Dispatch} from "redux";
 import {ActionsType} from "../../Data/redux";
 import {Users} from "./Users";
 import {UserType} from "../../Data/Types";
-import {followAC, setCurrentPageAC, setIsLoadingAC, setUsersAC, setUsersTotalCountAC} from "../../Data/UsersReducer";
+import {followAC, setCurrentPageAC, setIsLoading, setUsersAC, setUsersTotalCountAC} from "../../Data/UsersReducer";
 import React from "react";
 import axios from "axios";
 
@@ -85,7 +85,7 @@ function mapDispatchToProps(dispatch: Dispatch): mapDispatchToPropsType {
             dispatch(setCurrentPageAC(currentPage))
         },
         setIsLoading: (isLoading: boolean) => {
-            dispatch(setIsLoadingAC(isLoading))
+            dispatch(setIsLoading(isLoading))
         }
     }
 }

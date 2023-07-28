@@ -3,6 +3,7 @@ import s from './Users.module.css'
 import {UserType} from "../../Data/Types";
 import user from "./user.png"
 import {Preloader} from "../common/preloader/Preloader";
+import {NavLink} from "react-router-dom";
 
 export type UsersCompPropsType = {
     user: UserType[]
@@ -39,12 +40,14 @@ export const Users = (props: UsersCompPropsType) => {
                         return <div key={u.id} className={s.card}>
 
                             {props.isLoading ? <Preloader/> : <div>
-                                {u.photos.large || u.photos.small ? <img
-                                        className={s.avatar}
-                                        src={`${u.photos.large ? u.photos.large : u.photos.small}`}
-                                        alt="avatar"/> :
-                                    <img className={s.zaglushkaUser} src={user} alt="zaglushka"/>
-                                }
+                                <NavLink to={'/profile/' + u.id}>
+                                    {u.photos.large || u.photos.small ? <img
+                                            className={s.avatar}
+                                            src={`${u.photos.large ? u.photos.large : u.photos.small}`}
+                                            alt="avatar"/> :
+                                        <img className={s.zaglushkaUser} src={user} alt="zaglushka"/>
+                                    }
+                                </NavLink>
                             </div> }
 
                             {u.name}

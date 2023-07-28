@@ -1,17 +1,18 @@
-import {addCurrentPostTextAC, addPostAC} from "./ProfileReducer";
 import {addMessageAC, addMessageTextAC} from "./DialogsReducer";
-import {followAC, setCurrentPageAC, setIsLoadingAC, setUsersAC, setUsersTotalCountAC} from "./UsersReducer";
+import {followAC, setCurrentPageAC, setIsLoading, setUsersAC, setUsersTotalCountAC} from "./UsersReducer";
+import {addCurrentPostText, addPost, setUserProfile} from "./ProfileReducer";
 
 export type  ActionTypes =
-    ReturnType<typeof addCurrentPostTextAC>
-    | ReturnType<typeof addPostAC>
+    ReturnType<typeof addCurrentPostText>
+    | ReturnType<typeof addPost>
     | ReturnType<typeof addMessageTextAC>
     | ReturnType<typeof addMessageAC>
     | ReturnType<typeof followAC>
     | ReturnType<typeof setUsersAC>
     | ReturnType<typeof setUsersTotalCountAC>
     | ReturnType<typeof setCurrentPageAC>
-    | ReturnType<typeof setIsLoadingAC>
+    | ReturnType<typeof setIsLoading>
+    | ReturnType<typeof setUserProfile>
 
 export type Poststype = {
     id: string
@@ -21,6 +22,7 @@ export type Poststype = {
 export type ProfileType = {
     posts: Poststype[]
     newPostText: string
+    profile: null|UserProfileType
 }
 export type DialogsType = {
     id: string
@@ -50,9 +52,22 @@ export type UserType = {
     "followed": boolean
 };
 
-export type UsersType = {
-    items: UserType[],
-    totalCount: number
-    error: null | string
+type ContactsType = {
+    "facebook": null | string
+    "website": null | string
+    "vk": null | string
+    "twitter": null | string
+    "instagram": null | string
+    "youtube": null | string
+    "github": null | string
+    "mainLink": null | string
 }
-
+export type UserProfileType = {
+    "aboutMe": string
+    "contacts": ContactsType
+    "lookingForAJob": boolean
+    "lookingForAJobDescription": string
+    "fullName": string
+    "userId": number
+    "photos": photosType
+}
