@@ -8,15 +8,28 @@ import axios from "axios";
 import {setIsLoading} from "../../Data/UsersReducer";
 import {ProfileForOnePerson} from "./ProfileForOnePerson";
 import {Profile} from "./Profile";
+import {RouteComponentProps, withRouter} from "react-router-dom";
 
 export type ProfileAPIType = {
     render: () => JSX.Element
 }
+export type PathParamsType = {
+    userId: string
+}
+export type CommonPropsType = {
+    someString: string
+}
 
-class ProfileAPIContainer extends React.Component<ProfilePropsType, ProfileAPIType>{
+class ProfileAPIContainer extends React.Component<
+    ProfilePropsType &
+    RouteComponentProps<PathParamsType & CommonPropsType>, ProfileAPIType>{
     componentDidMount() {
+        let userId = this.props.match.params.userId
+        if(!userId) {
+            userId = "29680"
+        }
         this.props.setIsLoading(true)
-        axios.get<UserProfileType>(`https://social-network.samuraijs.com/api/1.0/profile/2`)
+        axios.get<UserProfileType>(`https://social-network.samuraijs.com/api/1.0/profile/` + userId)
             .then(res => {
                 this.props.setUserProfile(res.data)
                 this.props.setIsLoading(false)
@@ -66,7 +79,9 @@ function mapDispatchToProps (dispatch: Dispatch): mapDispatchToPropsType {
     }
 }
 
+export const ProfileWithRouterContainer = withRouter(ProfileAPIContainer)
+
 export const ProfileContainer = connect(
     mapStateToProps,
     mapDispatchToProps
-)(ProfileAPIContainer)
+)(ProfileWithRouterContainer)

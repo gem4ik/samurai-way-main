@@ -19,7 +19,7 @@ function App() {
                     <Nav/>
                 </div>
                 <div className={style.content}>
-                    <Route path="/profile" render={() =>
+                    <Route path="/profile/:userId?" render={() =>
                         <ProfileContainer />}>
                     </Route>
                     <Route
