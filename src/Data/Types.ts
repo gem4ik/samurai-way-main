@@ -71,3 +71,13 @@ export type UserProfileType = {
     "userId": number
     "photos": photosType
 }
+export type AuthUserDataType = {
+    id: number
+    email:string
+    login: string
+}
+export type AuthDataType = {
+    resultCode: number
+    messages: string[]
+    data: AuthUserDataType
+}

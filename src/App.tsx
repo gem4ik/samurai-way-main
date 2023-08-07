@@ -1,6 +1,5 @@
 import React from 'react';
 import style from './App.module.css';
-import {Header} from "./components/Header/Header";
 import {Nav} from "./components/Nav/Nav";
 import {BrowserRouter, Route} from "react-router-dom";
 import {Music} from "./components/Music/Music";
@@ -9,13 +8,14 @@ import {Settings} from "./components/Settings/Settings";
 import {ProfileContainer} from "./components/Profile/ProfileContainer";
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 import {UsersContainer} from "./components/Users/UsersContainer";
+import {HeaderContainer} from "./components/Header/HeaderContainer";
 
 function App() {
     return (
         <BrowserRouter>
             <div className={style.appWrapper}>
                 <div>
-                    <Header/>
+                    <HeaderContainer/>
                     <Nav/>
                 </div>
                 <div className={style.content}>

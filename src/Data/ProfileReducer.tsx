@@ -24,7 +24,6 @@ export const ProfileReducer = (state: ProfileType=InitialProfile, action: Action
             return state
         }
         case 'SET-USER-PROFILE': {
-            debugger
             return {...state, profile: {...action.payload.userProfile}}
         }
         default: return state
