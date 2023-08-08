@@ -35,6 +35,9 @@ export const UsersReducer = (state: initialUsersStateType = initialState, action
         case "SET-IS-LOADING": {
             return {...state, isLoading: action.payload.isLoading}
         }
+        case "SWITCH-FOLLOW": {
+           return  {...state, users: state.users.map(u=> u.id === action.payload.id ?{...u, followed:action.payload.value} : u) }
+        }
         default:
             return state
     }

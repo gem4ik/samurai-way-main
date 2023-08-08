@@ -4,10 +4,11 @@ import {UserType} from "../../Data/Types";
 import user from "./user.png"
 import {Preloader} from "../common/preloader/Preloader";
 import {NavLink} from "react-router-dom";
+import {UsersFollowedButton} from "./UsersFollowedButton/UsersFollowedButton";
 
 export type UsersCompPropsType = {
     user: UserType[]
-    setFollow: (value: boolean, id: number)=> void
+    setFollow: (value: boolean, id: number) => void
     pageSize: number
     totalUsersCount: number
     setCurrentPage: (currentPage: number) => void
@@ -16,9 +17,9 @@ export type UsersCompPropsType = {
 }
 export const Users = (props: UsersCompPropsType) => {
     let pages = []
-    let pagesCount = Math.ceil(props.totalUsersCount/props.pageSize)
-    for (let i=1; i <=pagesCount; i++) {
-        if(pages.length < 10) {
+    let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
+    for (let i = 1; i <= pagesCount; i++) {
+        if (pages.length < 10) {
             pages.push(i)
         }
     }
@@ -30,15 +31,15 @@ export const Users = (props: UsersCompPropsType) => {
                     return <button
                         key={p}
                         className={`${s.pageButton} ${(props.currentPage === p) ? s.activePage : s.pages}`}
-                        onClick={()=>props.setCurrentPage(p)}
+                        onClick={() => props.setCurrentPage(p)}
                     >{p}</button>
                 })}
             </div>
             <div className={s.users}>
                 <div className={s.cardWrapper}>
                     {props.user.map(u => {
+                        console.log(u.name + '-' + u.followed)
                         return <div key={u.id} className={s.card}>
-
                             {props.isLoading ? <Preloader/> : <div>
                                 <NavLink to={'/profile/' + u.id}>
                                     {u.photos.large || u.photos.small ? <img
@@ -48,10 +49,12 @@ export const Users = (props: UsersCompPropsType) => {
                                         <img className={s.zaglushkaUser} src={user} alt="zaglushka"/>
                                     }
                                 </NavLink>
-                            </div> }
-
+                            </div>}
                             {u.name}
-                            <button className={s.followButton}>{u.followed ? "followed" : "unfollowed"}</button>
+                           <UsersFollowedButton
+                               userId={u.id}
+                               setFollow={props.setFollow}
+                               followed={u.followed} />
                         </div>
                     })}
                 </div>

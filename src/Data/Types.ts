@@ -43,15 +43,6 @@ export type photosType = {
     "small": null | string,
     "large": null | string
 }
-export type UserType = {
-    "name": string
-    "id": number
-    "uniqueUrlName": null | any
-    "photos": photosType
-    "status": null | any,
-    "followed": boolean
-};
-
 type ContactsType = {
     "facebook": null | string
     "website": null | string
@@ -62,6 +53,7 @@ type ContactsType = {
     "github": null | string
     "mainLink": null | string
 }
+
 export type UserProfileType = {
     "aboutMe": string
     "contacts": ContactsType
@@ -80,4 +72,23 @@ export type AuthDataType = {
     resultCode: number
     messages: string[]
     data: AuthUserDataType
+}
+export type UserType = {
+    "name": string
+    "id": number
+    "uniqueUrlName": null | any
+    "photos": photosType
+    "status": null | any,
+    "followed": boolean
+};
+
+export type GetUserResponceType = {
+    items: UserType[]
+    totalCount: number
+    error: null|string
+}
+export type FollowPostResponceType = {
+    resultCode: number
+    messages: string[]
+    data:{}
 }

@@ -29,7 +29,7 @@ class ProfileAPIContainer extends React.Component<
             userId = "29680"
         }
         this.props.setIsLoading(true)
-        axios.get<UserProfileType>(`https://social-network.samuraijs.com/api/1.0/profile/` + userId)
+        axios.get<UserProfileType>(`https://social-network.samuraijs.com/api/1.0/profile/` + userId, {withCredentials: true})
             .then(res => {
                 this.props.setUserProfile(res.data)
                 this.props.setIsLoading(false)

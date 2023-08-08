@@ -2,8 +2,14 @@ import {connect} from "react-redux";
 import {Dispatch} from "redux";
 import {ActionsType} from "../../Data/redux";
 import {Users} from "./Users";
-import {UserType} from "../../Data/Types";
-import {followAC, setCurrentPageAC, setIsLoading, setUsersAC, setUsersTotalCountAC} from "../../Data/UsersReducer";
+import {GetUserResponceType, UserType} from "../../Data/Types";
+import {
+    followAC,
+    setCurrentPageAC,
+    setIsLoading,
+    setUsersAC,
+    setUsersTotalCountAC
+} from "../../Data/UsersReducer";
 import React from "react";
 import axios from "axios";
 
@@ -15,7 +21,7 @@ export type UsersAPIType = {
 class UsersAPI extends React.Component<UsersPropsType, UsersAPIType> {
     componentDidMount() {
         this.props.setIsLoading(true)
-        axios.get<any>(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}&page=${this.props.currentPage}`)
+        axios.get<GetUserResponceType>(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}&page=${this.props.currentPage}`)
             .then(res => {
                 this.props.setUsers(res.data.items)
                 this.props.setUsersTotalCount(res.data.totalCount)
@@ -26,7 +32,7 @@ class UsersAPI extends React.Component<UsersPropsType, UsersAPIType> {
     onPageChange = (pageNumber: number) => {
         this.props.setIsLoading(true)
         this.props.setCurrentPage(pageNumber)
-        axios.get<any>(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}&page=${pageNumber}`)
+        axios.get<GetUserResponceType>(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}&page=${pageNumber}`)
             .then(res => {
                 this.props.setUsers(res.data.items)
                 this.props.setIsLoading(false)
