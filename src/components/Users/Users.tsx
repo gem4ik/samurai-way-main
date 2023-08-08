@@ -8,12 +8,13 @@ import {UsersFollowedButton} from "./UsersFollowedButton/UsersFollowedButton";
 
 export type UsersCompPropsType = {
     user: UserType[]
-    setFollow: (value: boolean, id: number) => void
     pageSize: number
     totalUsersCount: number
     setCurrentPage: (currentPage: number) => void
     currentPage: number
     isLoading: boolean
+    setFollow: (userID: number)=>void
+    setUnfollow: (userID: number)=>void
 }
 export const Users = (props: UsersCompPropsType) => {
     let pages = []
@@ -38,7 +39,6 @@ export const Users = (props: UsersCompPropsType) => {
             <div className={s.users}>
                 <div className={s.cardWrapper}>
                     {props.user.map(u => {
-                        console.log(u.name + '-' + u.followed)
                         return <div key={u.id} className={s.card}>
                             {props.isLoading ? <Preloader/> : <div>
                                 <NavLink to={'/profile/' + u.id}>
@@ -52,8 +52,10 @@ export const Users = (props: UsersCompPropsType) => {
                             </div>}
                             {u.name}
                            <UsersFollowedButton
-                               userId={u.id}
                                setFollow={props.setFollow}
+                               setUnfollow={props.setUnfollow}
+                               name={u.name}
+                               userId={u.id}
                                followed={u.followed} />
                         </div>
                     })}

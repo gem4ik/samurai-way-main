@@ -26,26 +26,41 @@ export const UsersReducer = (state: initialUsersStateType = initialState, action
         case "SET-USERS": {
             return {...state, users: [...action.payload.users]}
         }
-        case "SET-USERS-TOTAL-COUNT":{
+        case "SET-USERS-TOTAL-COUNT": {
             return {...state, totalUsersCount: action.payload.totalUsersCount}
         }
-        case "SET-CURRENT-PAGE":{
+        case "SET-CURRENT-PAGE": {
             return {...state, currentPage: action.payload.currentPage}
         }
         case "SET-IS-LOADING": {
             return {...state, isLoading: action.payload.isLoading}
         }
-        case "SWITCH-FOLLOW": {
-           return  {...state, users: state.users.map(u=> u.id === action.payload.id ?{...u, followed:action.payload.value} : u) }
+        case "FOLLOW": {
+            return {
+                ...state,
+                users: state.users.map(u => u.id === action.payload.id ? {...u, followed: true} : u)
+            }
+        }
+        case "UNFOLLOW": {
+            return {
+                ...state,
+                users: state.users.map(u => u.id === action.payload.id ? {...u, followed: true} : u)
+            }
         }
         default:
             return state
     }
 };
-export const followAC = (value: boolean, id: number) => {
+export const followAC = (id: number) => {
     return {
-        type: "SWITCH-FOLLOW",
-        payload: {value, id}
+        type: "FOLLOW",
+        payload: {id}
+    } as const
+}
+export const unfollowAC = (id: number) => {
+    return {
+        type: "UNFOLLOW",
+        payload: {id}
     } as const
 }
 export const setUsersAC = (users: UserType[]) => {

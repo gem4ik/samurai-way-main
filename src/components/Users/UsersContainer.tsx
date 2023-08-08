@@ -2,29 +2,30 @@ import {connect} from "react-redux";
 import {Dispatch} from "redux";
 import {ActionsType} from "../../Data/redux";
 import {Users} from "./Users";
-import {GetUserResponceType, UserType} from "../../Data/Types";
+import {UserType} from "../../Data/Types";
 import {
     followAC,
     setCurrentPageAC,
     setIsLoading,
     setUsersAC,
-    setUsersTotalCountAC
+    setUsersTotalCountAC,
+    unfollowAC
 } from "../../Data/UsersReducer";
-import React from "react";
-import axios from "axios";
+import React, {useEffect} from "react";
+import {UsersAPI} from "../../api/api";
 
 export type UsersAPIType = {
     componentDidMount: () => void
     render: () => JSX.Element
 }
 
-class UsersAPI extends React.Component<UsersPropsType, UsersAPIType> {
+class UsersAPIComponent extends React.Component<UsersPropsType, UsersAPIType> {
     componentDidMount() {
         this.props.setIsLoading(true)
-        axios.get<GetUserResponceType>(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}&page=${this.props.currentPage}`)
-            .then(res => {
-                this.props.setUsers(res.data.items)
-                this.props.setUsersTotalCount(res.data.totalCount)
+        UsersAPI.getUsers(this.props.pageSize, this.props.currentPage)
+            .then(data => {
+                this.props.setUsers(data.items)
+                this.props.setUsersTotalCount(data.totalCount)
                 this.props.setIsLoading(false)
             })
     }
@@ -32,11 +33,27 @@ class UsersAPI extends React.Component<UsersPropsType, UsersAPIType> {
     onPageChange = (pageNumber: number) => {
         this.props.setIsLoading(true)
         this.props.setCurrentPage(pageNumber)
-        axios.get<GetUserResponceType>(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}&page=${pageNumber}`)
-            .then(res => {
-                this.props.setUsers(res.data.items)
+        UsersAPI.getUsers(this.props.pageSize, this.props.currentPage)
+            .then(data => {
+                this.props.setUsers(data.items)
                 this.props.setIsLoading(false)
             })
+    }
+    follow = (userID: number) => {
+        this.props.setIsLoading(true)
+            UsersAPI.follow(userID)
+                .then(() => {
+                    this.props.setFollow(userID)
+                })
+        this.props.setIsLoading(false)
+    }
+    unfollow = (userID: number) => {
+        this.props.setIsLoading(true)
+            UsersAPI.unfollow(userID)
+                .then(() => {
+                    this.props.setUnfollow(userID)
+                })
+        this.props.setIsLoading(false)
     }
 
     render() {
@@ -45,8 +62,9 @@ class UsersAPI extends React.Component<UsersPropsType, UsersAPIType> {
                       currentPage={this.props.currentPage}
                       totalUsersCount={this.props.totalUsersCount}
                       setCurrentPage={this.onPageChange}
-                      isLoading={this.props.isLoading}
-                      setFollow={this.props.setFollow}/>
+                      setFollow={this.follow}
+                      setUnfollow={this.unfollow}
+                      isLoading={this.props.isLoading}/>
     }
 }
 
@@ -58,7 +76,8 @@ type mapStateToPropsType = {
     isLoading: boolean
 }
 type mapDispatchToPropsType = {
-    setFollow: (value: boolean, id: number) => void
+    setFollow: (id: number) => void
+    setUnfollow: (id:number)=>void
     setUsers: (items: UserType[]) => void
     setUsersTotalCount: (totalUsersCount: number) => void
     setCurrentPage: (currentPage: number) => void
@@ -78,8 +97,11 @@ function mapStateToProps(state: ActionsType): mapStateToPropsType {
 
 function mapDispatchToProps(dispatch: Dispatch): mapDispatchToPropsType {
     return {
-        setFollow: (value: boolean, id: number) => {
-            dispatch(followAC(value, id))
+        setFollow: (id: number) => {
+            dispatch(followAC(id))
+        },
+        setUnfollow: (id: number) => {
+            dispatch(unfollowAC(id))
         },
         setUsers: (items) => {
             dispatch(setUsersAC(items))
@@ -96,4 +118,4 @@ function mapDispatchToProps(dispatch: Dispatch): mapDispatchToPropsType {
     }
 }
 
-export const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersAPI)
+export const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersAPIComponent)

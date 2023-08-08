@@ -1,5 +1,5 @@
 import {addMessageAC, addMessageTextAC} from "./DialogsReducer";
-import {followAC, setCurrentPageAC, setIsLoading, setUsersAC, setUsersTotalCountAC} from "./UsersReducer";
+import {followAC, setCurrentPageAC, setIsLoading, setUsersAC, setUsersTotalCountAC, unfollowAC} from "./UsersReducer";
 import {addCurrentPostText, addPost, setUserProfile} from "./ProfileReducer";
 
 export type  ActionTypes =
@@ -13,6 +13,7 @@ export type  ActionTypes =
     | ReturnType<typeof setCurrentPageAC>
     | ReturnType<typeof setIsLoading>
     | ReturnType<typeof setUserProfile>
+    | ReturnType<typeof unfollowAC>
 
 export type Poststype = {
     id: string
@@ -22,7 +23,7 @@ export type Poststype = {
 export type ProfileType = {
     posts: Poststype[]
     newPostText: string
-    profile: null|UserProfileType
+    profile: null | UserProfileType
 }
 export type DialogsType = {
     id: string
@@ -65,7 +66,7 @@ export type UserProfileType = {
 }
 export type AuthUserDataType = {
     id: number
-    email:string
+    email: string
     login: string
 }
 export type AuthDataType = {
@@ -85,10 +86,10 @@ export type UserType = {
 export type GetUserResponceType = {
     items: UserType[]
     totalCount: number
-    error: null|string
+    error: null | string
 }
 export type FollowPostResponceType = {
     resultCode: number
     messages: string[]
-    data:{}
+    data: {}
 }
