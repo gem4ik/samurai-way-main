@@ -1,6 +1,6 @@
 import {addMessageAC, addMessageTextAC} from "./DialogsReducer";
 import {followAC, setCurrentPageAC, setIsLoadingAC, setUsersAC, setUsersTotalCountAC, unfollowAC} from "./UsersReducer";
-import {addCurrentPostText, addPost, setUserProfile} from "./ProfileReducer";
+import {addCurrentPostText, addPost, setUserProfileAC} from "./ProfileReducer";
 
 export type  ActionTypes =
     ReturnType<typeof addCurrentPostText>
@@ -12,7 +12,7 @@ export type  ActionTypes =
     | ReturnType<typeof setUsersTotalCountAC>
     | ReturnType<typeof setCurrentPageAC>
     | ReturnType<typeof setIsLoadingAC>
-    | ReturnType<typeof setUserProfile>
+    | ReturnType<typeof setUserProfileAC>
     | ReturnType<typeof unfollowAC>
 
 export type Poststype = {

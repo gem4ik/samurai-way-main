@@ -1,5 +1,8 @@
 import {v1} from "uuid";
 import {ActionTypes, ProfileType, UserProfileType} from "./Types";
+import {Dispatch} from "redux";
+import {ProfileAPI} from "../api/api";
+import {setIsLoadingAC} from "./UsersReducer";
 
 const InitialProfile = {
     posts: [
@@ -41,9 +44,19 @@ export const addPost = () => {
         type: 'ADD-POST'
     } as const
 }
-export const setUserProfile = (userProfile: UserProfileType) => {
+export const setUserProfileAC = (userProfile: UserProfileType) => {
     return {
         type: 'SET-USER-PROFILE',
         payload: {userProfile}
     } as const
+}
+export const setUserProfileTC = (userId: string): any => {
+    return (dispatch: Dispatch) => {
+        dispatch(setIsLoadingAC(true))
+        ProfileAPI.setUsers(userId)
+            .then(res => {
+                dispatch(setUserProfileAC(res.data))
+                dispatch(setIsLoadingAC(false))
+            })
+    }
 }

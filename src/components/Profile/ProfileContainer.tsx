@@ -1,13 +1,11 @@
 import React, {ChangeEvent} from "react";
 import {ProfileType} from "../../Data/Types";
-import {addCurrentPostText, addPost, setUserProfile} from "../../Data/ProfileReducer";
+import {addCurrentPostText, addPost, setUserProfileTC} from "../../Data/ProfileReducer";
 import {connect} from "react-redux";
 import {RootStateType} from "../../Data/redux";
 import {Dispatch} from "redux";
-import {setIsLoadingAC} from "../../Data/UsersReducer";
 import {ProfileForOnePerson} from "./ProfileForOnePerson";
 import {RouteComponentProps, withRouter} from "react-router-dom";
-import {ProfileAPI} from "../../api/api";
 
 export type ProfileAPIType = {
     render: () => JSX.Element
@@ -27,12 +25,7 @@ class ProfileAPIContainer extends React.Component<
         if(!userId) {
             userId = "29680"
         }
-        this.props.setIsLoading(true)
-            ProfileAPI.setUsers(userId)
-            .then(res => {
-                this.props.setUserProfile(res.data)
-                this.props.setIsLoading(false)
-            })
+        this.props.setUserProfileTC(userId)
     }
     render() {
         return <div>
@@ -47,8 +40,7 @@ type mapStateToPropsType = {
 type mapDispatchToPropsType = {
     onChangeHandler: (e: ChangeEvent<HTMLTextAreaElement>)=> void
     onClickHandler: ()=> void
-    setIsLoading: (isLoading: boolean)=> void
-    setUserProfile: ( userProfile: any)=> void
+    setUserProfileTC: (userId: string)=> void
 }
 export type ProfilePropsType = mapStateToPropsType & mapDispatchToPropsType
 
@@ -68,11 +60,8 @@ function mapDispatchToProps (dispatch: Dispatch): mapDispatchToPropsType {
         onClickHandler: () => {
             dispatch(addPost())
         },
-        setIsLoading: (isLoading: boolean) => {
-            dispatch(setIsLoadingAC(isLoading))
-        },
-        setUserProfile: (userProfile: any) => {
-            dispatch(setUserProfile(userProfile))
+        setUserProfileTC: (userId:string)=>{
+            dispatch(setUserProfileTC(userId))
         }
     }
 }
