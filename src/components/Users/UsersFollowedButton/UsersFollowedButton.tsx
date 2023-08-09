@@ -12,17 +12,17 @@ type  UsersFollowedButtonType = {
 export const UsersFollowedButton = (props: UsersFollowedButtonType) => {
     return (
         <div>
-            {props.followed
+            {!props.followed
                 ? <button
                     onClick={() => {
                         console.log('post')
-                        props.setUnfollow(props.userId)
+                        props.setFollow(props.userId)
                     }}
                     className={s.followButton}>follow</button>
                 : <button
                     onClick={() => {
                         console.log('delete')
-                        props.setFollow(props.userId)
+                        props.setUnfollow(props.userId)
                     }}
                     className={s.followButton}>unfollow</button>}
         </div>
