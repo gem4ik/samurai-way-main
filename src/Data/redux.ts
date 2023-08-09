@@ -1,8 +1,9 @@
-import {combineReducers, createStore} from "redux";
+import {applyMiddleware, combineReducers, createStore} from "redux";
 import {ProfileReducer} from "./ProfileReducer";
 import {DialogsReducer} from "./DialogsReducer";
 import {UsersReducer} from "./UsersReducer";
 import {AuthReducer} from "./AuthReducer";
+import thunk from "redux-thunk";
 
 const reducers = combineReducers({
     profilePage: ProfileReducer,
@@ -13,4 +14,4 @@ const reducers = combineReducers({
 
 export type ActionsType = ReturnType<typeof reducers>
 
-export const store = createStore(reducers)
+export const store = createStore(reducers, applyMiddleware(thunk))

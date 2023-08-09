@@ -11,7 +11,7 @@ let initialState = {
     login: null,
     isAuth: false
 }
-export type AuthReducerActionType = ReturnType<typeof setAuthUserData>
+export type AuthReducerActionType = ReturnType<typeof setAuthUserDataAC>
 export const AuthReducer = (state:InitialStateType = initialState, action: AuthReducerActionType):InitialStateType => {
     switch (action.type) {
         case 'SET-USER-DATA' :{
@@ -20,7 +20,7 @@ export const AuthReducer = (state:InitialStateType = initialState, action: AuthR
         default: return state
     }
 }
-export const setAuthUserData = (userId: number|null, email:string|null, login:string|null) => {
+export const setAuthUserDataAC = (userId: number|null, email:string|null, login:string|null) => {
     return {
         type: 'SET-USER-DATA',
         payload: {userId, email, login}

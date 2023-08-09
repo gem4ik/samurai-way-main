@@ -4,11 +4,10 @@ import {addCurrentPostText, addPost, setUserProfile} from "../../Data/ProfileRed
 import {connect} from "react-redux";
 import {ActionsType} from "../../Data/redux";
 import {Dispatch} from "redux";
-import axios from "axios";
 import {setIsLoading} from "../../Data/UsersReducer";
 import {ProfileForOnePerson} from "./ProfileForOnePerson";
-import {Profile} from "./Profile";
 import {RouteComponentProps, withRouter} from "react-router-dom";
+import {ProfileAPI} from "../../api/api";
 
 export type ProfileAPIType = {
     render: () => JSX.Element
@@ -29,7 +28,7 @@ class ProfileAPIContainer extends React.Component<
             userId = "29680"
         }
         this.props.setIsLoading(true)
-        axios.get<UserProfileType>(`https://social-network.samuraijs.com/api/1.0/profile/` + userId, {withCredentials: true})
+            ProfileAPI.setUsers(userId)
             .then(res => {
                 this.props.setUserProfile(res.data)
                 this.props.setIsLoading(false)
@@ -38,7 +37,6 @@ class ProfileAPIContainer extends React.Component<
     render() {
         return <div>
             <ProfileForOnePerson {...this.props}/>
-            <Profile {...this.props}/>
         </div>
     }
 }

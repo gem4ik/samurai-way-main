@@ -1,5 +1,5 @@
 import axios from "axios";
-import {FollowPostResponceType, GetUserResponceType} from "../Data/Types";
+import {AuthDataType, FollowPostResponceType, GetUserResponceType, UserProfileType} from "../Data/Types";
 
 const instance = axios.create({
     withCredentials: true,
@@ -20,4 +20,14 @@ export const UsersAPI = {
     unfollow: (userId: number) => {
         return instance.delete<FollowPostResponceType>(`follow/${userId}`)
     },
+}
+export const AuthAPI = {
+    setAuthUserData: () => {
+        return instance.get<AuthDataType>(`auth/me`)
+    }
+}
+export const ProfileAPI = {
+    setUsers:(userId: string)=> {
+        return instance.get<UserProfileType>(`profile/` + userId)
+    }
 }
