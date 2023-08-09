@@ -1,6 +1,6 @@
 import {connect} from "react-redux";
 import {Dispatch} from "redux";
-import {ActionsType} from "../../Data/redux";
+import {RootStateType} from "../../Data/redux";
 import {addMessageAC, addMessageTextAC} from "../../Data/DialogsReducer";
 import {Dialogs} from "./Dialogs";
 import {MessageType} from "../../Data/Types";
@@ -15,7 +15,7 @@ type mapDispatchToPropsType = {
 }
 export type DialogsPropsType = mapStateToPropsType & mapDispatchToPropsType
 
-function mapStateToProps (state: ActionsType): mapStateToPropsType {
+function mapStateToProps (state: RootStateType): mapStateToPropsType {
     return {
         message: state.dialogsPage
     }

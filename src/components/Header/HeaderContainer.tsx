@@ -1,6 +1,6 @@
 import React from 'react';
 import {Header} from "./Header";
-import {ActionsType} from "../../Data/redux";
+import {RootStateType} from "../../Data/redux";
 import {Dispatch} from "redux";
 import {connect} from "react-redux";
 import {setAuthUserDataAC} from "../../Data/AuthReducer";
@@ -36,7 +36,7 @@ type mapDispatchToPropsType = {
 export type HeaderPropsType = mapStateToPropsType & mapDispatchToPropsType
 
 
-function mapStateToProps(state: ActionsType): mapStateToPropsType {
+function mapStateToProps(state: RootStateType): mapStateToPropsType {
     return {
         isAuth: state.auth.isAuth,
         login: state.auth.login

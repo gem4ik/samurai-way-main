@@ -1,4 +1,6 @@
 import {ActionTypes, UserType} from "./Types";
+import {UsersAPI} from "../api/api";
+import {Dispatch} from "redux";
 
 let initialState = {
     users: [],
@@ -9,8 +11,6 @@ let initialState = {
     currentPage: 1,
     isLoading: false,
 }
-
-
 export type initialUsersStateType = {
     users: UserType[]
     pageSize: number
@@ -51,24 +51,42 @@ export const UsersReducer = (state: initialUsersStateType = initialState, action
             return state
     }
 };
+
+
 export const followAC = (id: number) => {
     return {
         type: "FOLLOW",
         payload: {id}
     } as const
 }
+export const setFollowTC = (userID: number): any => {
+    return (dispatch: Dispatch)=>{
+        dispatch(setIsLoadingAC(true))
+        UsersAPI.follow(userID)
+            .then(() => {
+                dispatch(followAC(userID))
+            })
+        dispatch(setIsLoadingAC(false))
+    }
+}
+
 export const unfollowAC = (id: number) => {
     return {
         type: "UNFOLLOW",
         payload: {id}
     } as const
 }
-export const setUsersAC = (users: UserType[]) => {
-    return {
-        type: "SET-USERS",
-        payload: {users}
-    } as const
+export const setUnfollowTC = (userID: number): any => {
+    return (dispatch: Dispatch)=>{
+        dispatch(setIsLoadingAC(true))
+        UsersAPI.unfollow(userID)
+            .then(() => {
+                dispatch(unfollowAC(userID))
+            })
+        dispatch(setIsLoadingAC(false))
+    }
 }
+
 export const setUsersTotalCountAC = (totalUsersCount: number) => {
     return {
         type: "SET-USERS-TOTAL-COUNT",
@@ -81,9 +99,27 @@ export const setCurrentPageAC = (currentPage: number) => {
         payload: {currentPage}
     } as const
 }
-export const setIsLoading = (isLoading: boolean) => {
+export const setIsLoadingAC = (isLoading: boolean) => {
     return {
         type: "SET-IS-LOADING",
         payload: {isLoading}
     } as const
 }
+export const setUsersAC = (users: UserType[]) => {
+    return {
+        type: "SET-USERS",
+        payload: {users}
+    } as const
+}
+export const setUsersTC = (pageSize:number, currentPage:number): any => {
+    return (dispatch: Dispatch)=>{
+        dispatch(setIsLoadingAC(true))
+        UsersAPI.getUsers(pageSize, currentPage)
+            .then(data => {
+                dispatch(setUsersAC(data.items))
+                dispatch(setUsersTotalCountAC(data.totalCount))
+                dispatch(setIsLoadingAC(false))
+            })
+    }
+}
+// type ThunkType<ReturnType = void> = ThunkAction<ReturnType, RootStateType, unknown, AnyAction>

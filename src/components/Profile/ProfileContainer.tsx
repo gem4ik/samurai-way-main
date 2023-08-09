@@ -1,10 +1,10 @@
 import React, {ChangeEvent} from "react";
-import {ProfileType, UserProfileType} from "../../Data/Types";
+import {ProfileType} from "../../Data/Types";
 import {addCurrentPostText, addPost, setUserProfile} from "../../Data/ProfileReducer";
 import {connect} from "react-redux";
-import {ActionsType} from "../../Data/redux";
+import {RootStateType} from "../../Data/redux";
 import {Dispatch} from "redux";
-import {setIsLoading} from "../../Data/UsersReducer";
+import {setIsLoadingAC} from "../../Data/UsersReducer";
 import {ProfileForOnePerson} from "./ProfileForOnePerson";
 import {RouteComponentProps, withRouter} from "react-router-dom";
 import {ProfileAPI} from "../../api/api";
@@ -53,7 +53,7 @@ type mapDispatchToPropsType = {
 export type ProfilePropsType = mapStateToPropsType & mapDispatchToPropsType
 
 
-function mapStateToProps (state: ActionsType): mapStateToPropsType {
+function mapStateToProps (state: RootStateType): mapStateToPropsType {
     return {
         profile: state.profilePage
     }
@@ -69,7 +69,7 @@ function mapDispatchToProps (dispatch: Dispatch): mapDispatchToPropsType {
             dispatch(addPost())
         },
         setIsLoading: (isLoading: boolean) => {
-            dispatch(setIsLoading(isLoading))
+            dispatch(setIsLoadingAC(isLoading))
         },
         setUserProfile: (userProfile: any) => {
             dispatch(setUserProfile(userProfile))

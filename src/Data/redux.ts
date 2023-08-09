@@ -12,6 +12,6 @@ const reducers = combineReducers({
     auth: AuthReducer
 })
 
-export type ActionsType = ReturnType<typeof reducers>
+export type RootStateType = ReturnType<typeof reducers>
 
 export const store = createStore(reducers, applyMiddleware(thunk))

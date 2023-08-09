@@ -1,18 +1,10 @@
 import {connect} from "react-redux";
 import {Dispatch} from "redux";
-import {ActionsType} from "../../Data/redux";
+import {RootStateType} from "../../Data/redux";
 import {Users} from "./Users";
 import {UserType} from "../../Data/Types";
-import {
-    followAC,
-    setCurrentPageAC,
-    setIsLoading,
-    setUsersAC,
-    setUsersTotalCountAC,
-    unfollowAC
-} from "../../Data/UsersReducer";
-import React, {useEffect} from "react";
-import {UsersAPI} from "../../api/api";
+import {setFollowTC, setUnfollowTC, setUsersTC} from "../../Data/UsersReducer";
+import React from "react";
 
 export type UsersAPIType = {
     componentDidMount: () => void
@@ -21,39 +13,17 @@ export type UsersAPIType = {
 
 class UsersAPIComponent extends React.Component<UsersPropsType, UsersAPIType> {
     componentDidMount() {
-        this.props.setIsLoading(true)
-        UsersAPI.getUsers(this.props.pageSize, this.props.currentPage)
-            .then(data => {
-                this.props.setUsers(data.items)
-                this.props.setUsersTotalCount(data.totalCount)
-                this.props.setIsLoading(false)
-            })
+        this.props.setUsersTC(this.props.pageSize, this.props.currentPage)
     }
 
     onPageChange = (pageNumber: number) => {
-        this.props.setIsLoading(true)
-        this.props.setCurrentPage(pageNumber)
-        UsersAPI.getUsers(this.props.pageSize, this.props.currentPage)
-            .then(data => {
-                this.props.setUsers(data.items)
-                this.props.setIsLoading(false)
-            })
+        this.props.setUsersTC(this.props.pageSize, pageNumber)
     }
     follow = (userID: number) => {
-        this.props.setIsLoading(true)
-            UsersAPI.follow(userID)
-                .then(() => {
-                    this.props.setFollow(userID)
-                })
-        this.props.setIsLoading(false)
+        this.props.setFollowTC(userID)
     }
     unfollow = (userID: number) => {
-        this.props.setIsLoading(true)
-            UsersAPI.unfollow(userID)
-                .then(() => {
-                    this.props.setUnfollow(userID)
-                })
-        this.props.setIsLoading(false)
+        this.props.setUnfollowTC(userID)
     }
 
     render() {
@@ -76,16 +46,13 @@ type mapStateToPropsType = {
     isLoading: boolean
 }
 type mapDispatchToPropsType = {
-    setFollow: (id: number) => void
-    setUnfollow: (id:number)=>void
-    setUsers: (items: UserType[]) => void
-    setUsersTotalCount: (totalUsersCount: number) => void
-    setCurrentPage: (currentPage: number) => void
-    setIsLoading: (isLoading: boolean)=> void
+    setUsersTC: (pageSize: number, currentPage: number) => void
+    setFollowTC: (userId: number) => void
+    setUnfollowTC: (userId: number) => void
 }
 export type UsersPropsType = mapStateToPropsType & mapDispatchToPropsType
 
-function mapStateToProps(state: ActionsType): mapStateToPropsType {
+function mapStateToProps(state: RootStateType): mapStateToPropsType {
     return {
         users: state.usersPage.users,
         pageSize: state.usersPage.pageSize,
@@ -97,23 +64,14 @@ function mapStateToProps(state: ActionsType): mapStateToPropsType {
 
 function mapDispatchToProps(dispatch: Dispatch): mapDispatchToPropsType {
     return {
-        setFollow: (id: number) => {
-            dispatch(followAC(id))
+        setUsersTC: (pageSize: number, currentPage: number) => {
+            dispatch(setUsersTC(pageSize, currentPage))
         },
-        setUnfollow: (id: number) => {
-            dispatch(unfollowAC(id))
+        setFollowTC: (userId: number) => {
+            dispatch(setFollowTC(userId))
         },
-        setUsers: (items) => {
-            dispatch(setUsersAC(items))
-        },
-        setUsersTotalCount: (totalUsersCount: number) => {
-            dispatch(setUsersTotalCountAC(totalUsersCount))
-        },
-        setCurrentPage: (currentPage: number) => {
-            dispatch(setCurrentPageAC(currentPage))
-        },
-        setIsLoading: (isLoading: boolean) => {
-            dispatch(setIsLoading(isLoading))
+        setUnfollowTC: (userId: number) => {
+            dispatch(setUnfollowTC(userId))
         }
     }
 }
