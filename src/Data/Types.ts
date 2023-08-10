@@ -15,6 +15,7 @@ export type  ActionTypes =
     | ReturnType<typeof setUserProfileAC>
     | ReturnType<typeof unfollowAC>
 
+
 export type Poststype = {
     id: string
     post: string

@@ -1,5 +1,6 @@
 import {Dispatch} from "redux";
 import {AuthAPI} from "../api/api";
+import {ThunkType} from "./redux";
 
 export type InitialStateType = {
     userId: null|number
@@ -28,7 +29,7 @@ export const setAuthUserDataAC = (userId: number|null, email:string|null, login:
         payload: {userId, email, login}
     }as const
 }
-export const setAuthUserDataTC = (): any => {
+export const setAuthUserDataTC = (): ThunkType => {
     return (dispatch: Dispatch) => {
         AuthAPI.setAuthUserData()
             .then(res => {

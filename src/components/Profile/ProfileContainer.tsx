@@ -2,7 +2,7 @@ import React, {ChangeEvent} from "react";
 import {ProfileType} from "../../Data/Types";
 import {addCurrentPostText, addPost, setUserProfileTC} from "../../Data/ProfileReducer";
 import {connect} from "react-redux";
-import {RootStateType} from "../../Data/redux";
+import {AppDispatch, RootStateType} from "../../Data/redux";
 import {Dispatch} from "redux";
 import {ProfileForOnePerson} from "./ProfileForOnePerson";
 import {RouteComponentProps, withRouter} from "react-router-dom";
@@ -50,7 +50,7 @@ function mapStateToProps (state: RootStateType): mapStateToPropsType {
         profile: state.profilePage
     }
 }
-function mapDispatchToProps (dispatch: Dispatch): mapDispatchToPropsType {
+function mapDispatchToProps (dispatch: AppDispatch): mapDispatchToPropsType {
     return {
         onChangeHandler: (e: ChangeEvent<HTMLTextAreaElement>) => {
             if (e.currentTarget.value) {

@@ -1,6 +1,5 @@
 import {connect} from "react-redux";
-import {Dispatch} from "redux";
-import {RootStateType} from "../../Data/redux";
+import {AppDispatch, RootStateType} from "../../Data/redux";
 import {Users} from "./Users";
 import {UserType} from "../../Data/Types";
 import {setFollowTC, setUnfollowTC, setUsersTC} from "../../Data/UsersReducer";
@@ -62,7 +61,7 @@ function mapStateToProps(state: RootStateType): mapStateToPropsType {
     }
 }
 
-function mapDispatchToProps(dispatch: Dispatch): mapDispatchToPropsType {
+function mapDispatchToProps(dispatch: AppDispatch): mapDispatchToPropsType {
     return {
         setUsersTC: (pageSize: number, currentPage: number) => {
             dispatch(setUsersTC(pageSize, currentPage))

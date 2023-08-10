@@ -1,6 +1,6 @@
 import React from 'react';
 import {Header} from "./Header";
-import {RootStateType} from "../../Data/redux";
+import {AppDispatch, RootStateType} from "../../Data/redux";
 import {Dispatch} from "redux";
 import {connect} from "react-redux";
 import {setAuthUserDataTC} from "../../Data/AuthReducer";
@@ -37,7 +37,7 @@ function mapStateToProps(state: RootStateType): mapStateToPropsType {
     }
 }
 
-function mapDispatchToProps(dispatch: Dispatch): mapDispatchToPropsType {
+function mapDispatchToProps(dispatch: AppDispatch): mapDispatchToPropsType {
     return {
         setAuthUserDataTC: () => {
             dispatch(setAuthUserDataTC())

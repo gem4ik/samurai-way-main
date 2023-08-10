@@ -3,6 +3,7 @@ import {ActionTypes, ProfileType, UserProfileType} from "./Types";
 import {Dispatch} from "redux";
 import {ProfileAPI} from "../api/api";
 import {setIsLoadingAC} from "./UsersReducer";
+import {ThunkType} from "./redux";
 
 const InitialProfile = {
     posts: [
@@ -50,7 +51,7 @@ export const setUserProfileAC = (userProfile: UserProfileType) => {
         payload: {userProfile}
     } as const
 }
-export const setUserProfileTC = (userId: string): any => {
+export const setUserProfileTC = (userId: string): ThunkType => {
     return (dispatch: Dispatch) => {
         dispatch(setIsLoadingAC(true))
         ProfileAPI.setUsers(userId)

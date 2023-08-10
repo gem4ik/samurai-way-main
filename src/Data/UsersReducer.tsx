@@ -1,6 +1,7 @@
 import {ActionTypes, UserType} from "./Types";
 import {UsersAPI} from "../api/api";
 import {Dispatch} from "redux";
+import {ThunkType} from "./redux";
 
 let initialState = {
     users: [],
@@ -111,8 +112,8 @@ export const setUsersAC = (users: UserType[]) => {
         payload: {users}
     } as const
 }
-export const setUsersTC = (pageSize:number, currentPage:number): any => {
-    return (dispatch: Dispatch)=>{
+export const setUsersTC = (pageSize:number, currentPage:number): ThunkType => {
+    return (dispatch) =>{
         dispatch(setIsLoadingAC(true))
         UsersAPI.getUsers(pageSize, currentPage)
             .then(data => {
@@ -122,4 +123,4 @@ export const setUsersTC = (pageSize:number, currentPage:number): any => {
             })
     }
 }
-// type ThunkType<ReturnType = void> = ThunkAction<ReturnType, RootStateType, unknown, AnyAction>
+
