@@ -3,7 +3,6 @@ import {ProfileType} from "../../Data/Types";
 import {addCurrentPostText, addPost, setUserProfileTC} from "../../Data/ProfileReducer";
 import {connect} from "react-redux";
 import {AppDispatch, RootStateType} from "../../Data/redux";
-import {Dispatch} from "redux";
 import {ProfileForOnePerson} from "./ProfileForOnePerson";
 import {RouteComponentProps, withRouter} from "react-router-dom";
 
@@ -36,6 +35,7 @@ class ProfileAPIContainer extends React.Component<
 
 type mapStateToPropsType = {
     profile: ProfileType
+    isAuth: boolean
 }
 type mapDispatchToPropsType = {
     onChangeHandler: (e: ChangeEvent<HTMLTextAreaElement>)=> void
@@ -47,7 +47,8 @@ export type ProfilePropsType = mapStateToPropsType & mapDispatchToPropsType
 
 function mapStateToProps (state: RootStateType): mapStateToPropsType {
     return {
-        profile: state.profilePage
+        profile: state.profilePage,
+        isAuth: state.auth.isAuth
     }
 }
 function mapDispatchToProps (dispatch: AppDispatch): mapDispatchToPropsType {

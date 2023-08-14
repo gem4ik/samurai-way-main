@@ -1,7 +1,6 @@
 import React from 'react';
 import {Header} from "./Header";
 import {AppDispatch, RootStateType} from "../../Data/redux";
-import {Dispatch} from "redux";
 import {connect} from "react-redux";
 import {setAuthUserDataTC} from "../../Data/AuthReducer";
 

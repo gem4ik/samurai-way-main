@@ -2,8 +2,10 @@ import React from 'react';
 import {AddPostField} from "./AddPostField/AddPostField";
 import {Posts} from "./Posts/Posts";
 import {ProfilePropsType} from "./ProfileContainer";
+import {Redirect} from "react-router-dom";
 
 export const ProfileForOnePerson = (props: ProfilePropsType) => {
+    if(!props.isAuth) return <Redirect to={'/login'}/>
     return (
         <div>
             <div>

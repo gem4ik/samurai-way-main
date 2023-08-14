@@ -3,7 +3,7 @@ import s from './Users.module.css'
 import {UserType} from "../../Data/Types";
 import user from "./user.png"
 import {Preloader} from "../common/preloader/Preloader";
-import {NavLink} from "react-router-dom";
+import {NavLink, Redirect} from "react-router-dom";
 import {UsersFollowedButton} from "./UsersFollowedButton/UsersFollowedButton";
 
 export type UsersCompPropsType = {
@@ -13,6 +13,7 @@ export type UsersCompPropsType = {
     setCurrentPage: (currentPage: number) => void
     currentPage: number
     isLoading: boolean
+    isAuth: boolean
     setFollow: (userID: number)=>void
     setUnfollow: (userID: number)=>void
 }
@@ -24,7 +25,7 @@ export const Users = (props: UsersCompPropsType) => {
             pages.push(i)
         }
     }
-
+    if(!props.isAuth) return <Redirect to={'/login'}/>
     return (
         <div className={s.usersWrapper}>
             <div className={s.pagination}>

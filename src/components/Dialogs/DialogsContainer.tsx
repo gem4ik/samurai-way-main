@@ -8,6 +8,7 @@ import {MessageType} from "../../Data/Types";
 
 type mapStateToPropsType = {
     message: MessageType
+    isAuth: boolean
 }
 type mapDispatchToPropsType = {
     onChangeHandler: (title: string)=> void
@@ -17,7 +18,8 @@ export type DialogsPropsType = mapStateToPropsType & mapDispatchToPropsType
 
 function mapStateToProps (state: RootStateType): mapStateToPropsType {
     return {
-        message: state.dialogsPage
+        message: state.dialogsPage,
+        isAuth: state.auth.isAuth
     }
 }
 function mapDispatchToProps (dispatch: Dispatch): mapDispatchToPropsType {

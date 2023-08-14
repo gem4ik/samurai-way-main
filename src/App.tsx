@@ -9,6 +9,7 @@ import {ProfileContainer} from "./components/Profile/ProfileContainer";
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 import {UsersContainer} from "./components/Users/UsersContainer";
 import {HeaderContainer} from "./components/Header/HeaderContainer";
+import {Login} from "./components/Login/Login";
 
 function App() {
     return (
@@ -30,6 +31,7 @@ function App() {
                         path="/users" render={() =>
                         <UsersContainer />}>
                     </Route>
+                    <Route path='/login' render={()=><Login/>}></Route>
                     <Route path="/music" render={() => <Music/>}> </Route>
                     <Route path="/news" render={() => <News/>}> </Route>
                     <Route path="/settings" render={() => <Settings/>}> </Route>

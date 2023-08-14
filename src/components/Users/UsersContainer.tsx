@@ -33,6 +33,7 @@ class UsersAPIComponent extends React.Component<UsersPropsType, UsersAPIType> {
                       setCurrentPage={this.onPageChange}
                       setFollow={this.follow}
                       setUnfollow={this.unfollow}
+                      isAuth={this.props.isAuth}
                       isLoading={this.props.isLoading}/>
     }
 }
@@ -43,6 +44,7 @@ type mapStateToPropsType = {
     totalUsersCount: number
     currentPage: number
     isLoading: boolean
+    isAuth: boolean
 }
 type mapDispatchToPropsType = {
     setUsersTC: (pageSize: number, currentPage: number) => void
@@ -58,6 +60,7 @@ function mapStateToProps(state: RootStateType): mapStateToPropsType {
         totalUsersCount: state.usersPage.totalUsersCount,
         currentPage: state.usersPage.currentPage,
         isLoading: state.usersPage.isLoading,
+        isAuth: state.auth.isAuth
     }
 }
 
