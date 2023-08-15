@@ -4,7 +4,8 @@ import {addCurrentPostText, addPost, setUserProfileTC} from "../../Data/ProfileR
 import {connect} from "react-redux";
 import {AppDispatch, RootStateType} from "../../Data/redux";
 import {ProfileForOnePerson} from "./ProfileForOnePerson";
-import {RouteComponentProps, withRouter} from "react-router-dom";
+import {Redirect, RouteComponentProps, withRouter} from "react-router-dom";
+import {withAuthHOK} from "../../Data/withAuthHOK";
 
 export type ProfileAPIType = {
     render: () => JSX.Element
@@ -69,7 +70,7 @@ function mapDispatchToProps (dispatch: AppDispatch): mapDispatchToPropsType {
 
 export const ProfileWithRouterContainer = withRouter(ProfileAPIContainer)
 
-export const ProfileContainer = connect(
+export const ProfileContainer = withAuthHOK(connect(
     mapStateToProps,
     mapDispatchToProps
-)(ProfileWithRouterContainer)
+)(ProfileWithRouterContainer))

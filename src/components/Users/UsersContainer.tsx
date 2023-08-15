@@ -4,6 +4,8 @@ import {Users} from "./Users";
 import {UserType} from "../../Data/Types";
 import {setFollowTC, setUnfollowTC, setUsersTC} from "../../Data/UsersReducer";
 import React from "react";
+import {Redirect} from "react-router-dom";
+import {withAuthHOK} from "../../Data/withAuthHOK";
 
 export type UsersAPIType = {
     componentDidMount: () => void
@@ -78,4 +80,5 @@ function mapDispatchToProps(dispatch: AppDispatch): mapDispatchToPropsType {
     }
 }
 
-export const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersAPIComponent)
+export const UsersContainer =
+    withAuthHOK(connect(mapStateToProps, mapDispatchToProps)(UsersAPIComponent))

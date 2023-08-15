@@ -5,7 +5,7 @@ import {ProfilePropsType} from "./ProfileContainer";
 import {Redirect} from "react-router-dom";
 
 export const ProfileForOnePerson = (props: ProfilePropsType) => {
-    if(!props.isAuth) return <Redirect to={'/login'}/>
+
     return (
         <div>
             <div>

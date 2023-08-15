@@ -25,7 +25,7 @@ export const Users = (props: UsersCompPropsType) => {
             pages.push(i)
         }
     }
-    if(!props.isAuth) return <Redirect to={'/login'}/>
+
     return (
         <div className={s.usersWrapper}>
             <div className={s.pagination}>
