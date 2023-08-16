@@ -4,8 +4,8 @@ import {Users} from "./Users";
 import {UserType} from "../../Data/Types";
 import {setFollowTC, setUnfollowTC, setUsersTC} from "../../Data/UsersReducer";
 import React from "react";
-import {Redirect} from "react-router-dom";
 import {withAuthHOK} from "../../Data/withAuthHOK";
+import {compose} from "redux";
 
 export type UsersAPIType = {
     componentDidMount: () => void
@@ -54,7 +54,6 @@ type mapDispatchToPropsType = {
     setUnfollowTC: (userId: number) => void
 }
 export type UsersPropsType = mapStateToPropsType & mapDispatchToPropsType
-
 function mapStateToProps(state: RootStateType): mapStateToPropsType {
     return {
         users: state.usersPage.users,
@@ -65,7 +64,6 @@ function mapStateToProps(state: RootStateType): mapStateToPropsType {
         isAuth: state.auth.isAuth
     }
 }
-
 function mapDispatchToProps(dispatch: AppDispatch): mapDispatchToPropsType {
     return {
         setUsersTC: (pageSize: number, currentPage: number) => {
@@ -80,5 +78,7 @@ function mapDispatchToProps(dispatch: AppDispatch): mapDispatchToPropsType {
     }
 }
 
-export const UsersContainer =
-    withAuthHOK(connect(mapStateToProps, mapDispatchToProps)(UsersAPIComponent))
+export default compose<React.ComponentType>(
+    withAuthHOK,
+    connect(mapStateToProps, mapDispatchToProps)
+)(UsersAPIComponent)

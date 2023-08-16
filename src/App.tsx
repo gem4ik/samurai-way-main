@@ -5,11 +5,11 @@ import {BrowserRouter, Route} from "react-router-dom";
 import {Music} from "./components/Music/Music";
 import {News} from "./components/News/News";
 import {Settings} from "./components/Settings/Settings";
-import {ProfileContainer} from "./components/Profile/ProfileContainer";
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
-import {UsersContainer} from "./components/Users/UsersContainer";
+import UsersAPIComponent from "./components/Users/UsersContainer";
 import {HeaderContainer} from "./components/Header/HeaderContainer";
 import {Login} from "./components/Login/Login";
+import ProfileAPIContainer from "./components/Profile/ProfileContainer";
 
 function App() {
     return (
@@ -21,7 +21,7 @@ function App() {
                 </div>
                 <div className={style.content}>
                     <Route path="/profile/:userId?" render={() =>
-                        <ProfileContainer />}>
+                        <ProfileAPIContainer />}>
                     </Route>
                     <Route
                         path="/dialogs" render={() =>
@@ -29,7 +29,7 @@ function App() {
                     </Route>
                     <Route
                         path="/users" render={() =>
-                        <UsersContainer />}>
+                        <UsersAPIComponent />}>
                     </Route>
                     <Route path='/login' render={()=><Login/>}></Route>
                     <Route path="/music" render={() => <Music/>}> </Route>
