@@ -3,7 +3,7 @@ import {connect} from "react-redux";
 import {AppDispatch, RootStateType} from "../../Data/redux";
 import {useFormik} from "formik";
 import {MeLoginTC} from "../../Data/AuthReducer";
-import {Redirect} from "react-router-dom";
+import {getIsAuth} from "../../Data/Selectors/users-selectors";
 
 export type FormikErrorType = {
     email?: string
@@ -81,7 +81,7 @@ type mapStateToPropsType = {
 }
 const mapStateToProps =(state: RootStateType)=>{
     return {
-        isAuth:state.auth.isAuth
+        isAuth: getIsAuth(state)
     }
 }
 type mapDispatchToPropsType = {

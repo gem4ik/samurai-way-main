@@ -6,6 +6,13 @@ import {setFollowTC, setUnfollowTC, setUsersTC} from "../../Data/UsersReducer";
 import React from "react";
 import {withAuthHOK} from "../../Data/withAuthHOK";
 import {compose} from "redux";
+import {
+    getCurrentPage, getIsAuth,
+    getIsLoading,
+    getPageSize,
+    getTotalUsersCount,
+    getUsers
+} from "../../Data/Selectors/users-selectors";
 
 export type UsersAPIType = {
     componentDidMount: () => void
@@ -27,6 +34,7 @@ class UsersAPIComponent extends React.Component<UsersPropsType, UsersAPIType> {
     }
 
     render() {
+        console.log('render')
         return <Users user={this.props.users}
                       pageSize={this.props.pageSize}
                       currentPage={this.props.currentPage}
@@ -54,13 +62,14 @@ type mapDispatchToPropsType = {
 }
 export type UsersPropsType = mapStateToPropsType & mapDispatchToPropsType
 function mapStateToProps(state: RootStateType): mapStateToPropsType {
+    console.log("mstp")
     return {
-        users: state.usersPage.users,
-        pageSize: state.usersPage.pageSize,
-        totalUsersCount: state.usersPage.totalUsersCount,
-        currentPage: state.usersPage.currentPage,
-        isLoading: state.usersPage.isLoading,
-        isAuth: state.auth.isAuth
+        users: getUsers(state),
+        pageSize: getPageSize(state),
+        totalUsersCount: getTotalUsersCount(state),
+        currentPage: getCurrentPage(state),
+        isLoading: getIsLoading(state),
+        isAuth: getIsAuth(state)
     }
 }
 function mapDispatchToProps(dispatch: AppDispatch): mapDispatchToPropsType {

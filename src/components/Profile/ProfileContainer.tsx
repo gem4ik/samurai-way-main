@@ -7,6 +7,8 @@ import {ProfileForOnePerson} from "./ProfileForOnePerson";
 import {RouteComponentProps, withRouter} from "react-router-dom";
 import {withAuthHOK} from "../../Data/withAuthHOK";
 import {compose} from "redux";
+import {getProfilePage, getStatus} from "../../Data/Selectors/profile-selectors";
+import {getIsAuth} from "../../Data/Selectors/users-selectors";
 
 export type ProfileAPIType = {
     render: () => JSX.Element
@@ -51,9 +53,9 @@ type mapDispatchToPropsType = {
 export type ProfilePropsType = mapStateToPropsType & mapDispatchToPropsType
 function mapStateToProps (state: RootStateType): mapStateToPropsType {
     return {
-        profile: state.profilePage,
-        isAuth: state.auth.isAuth,
-        status: state.profilePage.status
+        profile: getProfilePage(state),
+        isAuth: getIsAuth(state),
+        status: getStatus(state)
     }
 }
 function mapDispatchToProps (dispatch: AppDispatch): mapDispatchToPropsType {

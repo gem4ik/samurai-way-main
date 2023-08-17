@@ -3,6 +3,7 @@ import {Header} from "./Header";
 import {AppDispatch, RootStateType} from "../../Data/redux";
 import {connect} from "react-redux";
 import {MeLogoutTC} from "../../Data/AuthReducer";
+import {getIsAuth, getLogin} from "../../Data/Selectors/users-selectors";
 
 export type HeaderAPIContainerType = {
     render: () => JSX.Element
@@ -28,8 +29,8 @@ export type HeaderPropsType = mapStateToPropsType & mapDispatchToPropsType
 
 function mapStateToProps(state: RootStateType): mapStateToPropsType {
     return {
-        isAuth: state.auth.isAuth,
-        login: state.auth.login
+        isAuth: getIsAuth(state),
+        login: getLogin(state)
     }
 }
 
