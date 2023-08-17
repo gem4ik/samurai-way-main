@@ -6,6 +6,7 @@ import {HeaderPropsType} from "./HeaderContainer";
 
 
 export function Header(props: HeaderPropsType) {
+
     return (
         <header className={style.header}>
             <div>
@@ -18,7 +19,7 @@ export function Header(props: HeaderPropsType) {
                 </NavLink>
                 <div className={s.loginBlock}>
                     {props.isAuth
-                        ?props.login
+                        ? <button onClick={()=>props.logout()}>LOGOUT</button>
                     :<NavLink to={'/login'}>Login</NavLink>}
                 </div>
             </div>

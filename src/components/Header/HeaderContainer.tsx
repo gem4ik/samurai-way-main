@@ -2,7 +2,7 @@ import React from 'react';
 import {Header} from "./Header";
 import {AppDispatch, RootStateType} from "../../Data/redux";
 import {connect} from "react-redux";
-import {setAuthUserDataTC} from "../../Data/AuthReducer";
+import {MeLogoutTC, setAuthUserDataTC} from "../../Data/AuthReducer";
 
 export type HeaderAPIContainerType = {
     render: () => JSX.Element
@@ -25,6 +25,7 @@ type mapStateToPropsType = {
 }
 type mapDispatchToPropsType = {
     setAuthUserDataTC: () => void
+    logout: () => void
 }
 export type HeaderPropsType = mapStateToPropsType & mapDispatchToPropsType
 
@@ -40,6 +41,9 @@ function mapDispatchToProps(dispatch: AppDispatch): mapDispatchToPropsType {
     return {
         setAuthUserDataTC: () => {
             dispatch(setAuthUserDataTC())
+        },
+        logout: () => {
+            dispatch(MeLogoutTC())
         }
     }
 }

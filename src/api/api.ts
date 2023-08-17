@@ -2,7 +2,7 @@ import axios, {AxiosResponse} from "axios";
 import {
     AuthDataType,
     FollowPostResponceType,
-    GetUserResponceType,
+    GetUserResponceType, LoginRequestType, LoginResponceType,
     SetStatusResponceType,
     UserProfileType
 } from "../Data/Types";
@@ -29,6 +29,12 @@ export const UsersAPI = {
 export const AuthAPI = {
     setAuthUserData: () => {
         return instance.get<AuthDataType>(`auth/me`)
+    },
+    meLogin: (loginObj:LoginRequestType)=>{
+        return instance.post<null, AxiosResponse<LoginResponceType>, LoginRequestType>(`auth/login`, loginObj)
+    },
+    meLogout: ()=>{
+        return instance.delete<FollowPostResponceType>(`auth/login`)
     }
 }
 export const ProfileAPI = {

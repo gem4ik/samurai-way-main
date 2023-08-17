@@ -1,6 +1,7 @@
 import {addMessageAC, addMessageTextAC} from "./DialogsReducer";
 import {followAC, setCurrentPageAC, setIsLoadingAC, setUsersAC, setUsersTotalCountAC, unfollowAC} from "./UsersReducer";
 import {addCurrentPostText, addPost, getStatusAC, setStatusAC, setUserProfileAC} from "./ProfileReducer";
+import {MeLoginAC, MeLogoutAC, setAuthUserDataAC} from "./AuthReducer";
 
 export type  ActionTypes =
     ReturnType<typeof addCurrentPostText>
@@ -16,6 +17,9 @@ export type  ActionTypes =
     | ReturnType<typeof unfollowAC>
     | ReturnType<typeof getStatusAC>
     | ReturnType<typeof setStatusAC>
+    | ReturnType<typeof setAuthUserDataAC>
+    | ReturnType<typeof MeLoginAC>
+    | ReturnType<typeof MeLogoutAC>
 
 export type Poststype = {
     id: string
@@ -96,9 +100,22 @@ export type FollowPostResponceType = {
     messages: string[]
     data: {}
 }
-export type SetStatusResponceType<D={}> = {
+export type SetStatusResponceType<D = {}> = {
     data: D
     fieldsError: string[]
     messages: string[]
     resultCode: number
+}
+export type LoginRequestType = {
+    email: string|null
+    password: string|null
+    rememberMe?: boolean|null
+    captcha?: boolean
+}
+export type LoginResponceType = {
+    resultCode: number
+    messages: string[]
+    data: {
+        userId: number
+    }
 }
