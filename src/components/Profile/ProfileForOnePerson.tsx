@@ -2,7 +2,7 @@ import React from 'react';
 import {AddPostField} from "./AddPostField/AddPostField";
 import {Posts} from "./Posts/Posts";
 import {ProfilePropsType} from "./ProfileContainer";
-import {Redirect} from "react-router-dom";
+import {EditableSpan} from "../common/EditableSpan/EditableSpan";
 
 export const ProfileForOnePerson = (props: ProfilePropsType) => {
 
@@ -18,6 +18,9 @@ export const ProfileForOnePerson = (props: ProfilePropsType) => {
                 </div>
                 {props.profile.profile?.lookingForAJobDescription}
             </div>
+            {props.status
+                ?<EditableSpan value={props.status} onChange={props.setStatusTC}/>
+            :'status'}
             <AddPostField
                 onClickHandler={props.onClickHandler}
                 onChangeHandler={props.onChangeHandler}

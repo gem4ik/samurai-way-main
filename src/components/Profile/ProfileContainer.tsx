@@ -1,6 +1,6 @@
 import React, {ChangeEvent} from "react";
 import {ProfileType} from "../../Data/Types";
-import {addCurrentPostText, addPost, setUserProfileTC} from "../../Data/ProfileReducer";
+import {addCurrentPostText, addPost, getStatusTC, setStatusTC, setUserProfileTC} from "../../Data/ProfileReducer";
 import {connect} from "react-redux";
 import {AppDispatch, RootStateType} from "../../Data/redux";
 import {ProfileForOnePerson} from "./ProfileForOnePerson";
@@ -24,9 +24,10 @@ class ProfileAPIContainer extends React.Component<
     componentDidMount() {
         let userId = this.props.match.params.userId
         if(!userId) {
-            userId = "29680"
+            userId = "29099"
         }
         this.props.setUserProfileTC(userId)
+        this.props.getStatusTC(userId)
     }
     render() {
         return <div>
@@ -38,17 +39,21 @@ class ProfileAPIContainer extends React.Component<
 type mapStateToPropsType = {
     profile: ProfileType
     isAuth: boolean
+    status: string
 }
 type mapDispatchToPropsType = {
     onChangeHandler: (e: ChangeEvent<HTMLTextAreaElement>)=> void
     onClickHandler: ()=> void
     setUserProfileTC: (userId: string)=> void
+    getStatusTC: (userId: string) => void
+    setStatusTC: (status: string) => void
 }
 export type ProfilePropsType = mapStateToPropsType & mapDispatchToPropsType
 function mapStateToProps (state: RootStateType): mapStateToPropsType {
     return {
         profile: state.profilePage,
-        isAuth: state.auth.isAuth
+        isAuth: state.auth.isAuth,
+        status: state.profilePage.status
     }
 }
 function mapDispatchToProps (dispatch: AppDispatch): mapDispatchToPropsType {
@@ -63,10 +68,15 @@ function mapDispatchToProps (dispatch: AppDispatch): mapDispatchToPropsType {
         },
         setUserProfileTC: (userId:string)=>{
             dispatch(setUserProfileTC(userId))
+        },
+        getStatusTC: (userId: string) => {
+            dispatch(getStatusTC(userId))
+        },
+        setStatusTC: (status: string) => {
+            dispatch(setStatusTC(status))
         }
     }
 }
-
 
 export default compose<React.ComponentType>(
     withRouter,

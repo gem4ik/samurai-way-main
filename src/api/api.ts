@@ -1,11 +1,16 @@
-import axios from "axios";
-import {AuthDataType, FollowPostResponceType, GetUserResponceType, UserProfileType} from "../Data/Types";
+import axios, {AxiosResponse} from "axios";
+import {
+    AuthDataType,
+    FollowPostResponceType,
+    GetUserResponceType,
+    SetStatusResponceType,
+    UserProfileType
+} from "../Data/Types";
 
 const instance = axios.create({
     withCredentials: true,
     baseURL: "https://social-network.samuraijs.com/api/1.0/",
     headers: {
-
     }
 })
 
@@ -29,5 +34,11 @@ export const AuthAPI = {
 export const ProfileAPI = {
     setUsers:(userId: string)=> {
         return instance.get<UserProfileType>(`profile/` + userId)
+    },
+    getStatus: (userId: string) => {
+        return instance.get<string>(`profile/status/${userId}`)
+    },
+    setStatus: (status: string) => {
+        return instance.put<null, AxiosResponse<SetStatusResponceType>, {status: string}>(`profile/status`, {status})
     }
 }

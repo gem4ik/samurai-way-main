@@ -12,13 +12,20 @@ const InitialProfile = {
         {id: v1(), post: "It's my first post", likeValue: 7}
     ],
     newPostText: '',
-    profile: null
+    profile: null,
+    status: ''
 }
 
-export const ProfileReducer = (state: ProfileType=InitialProfile, action: ActionTypes):ProfileType => {
+export const ProfileReducer = (state: ProfileType = InitialProfile, action: ActionTypes): ProfileType => {
     switch (action.type) {
         case 'ADD-CURRENT-POST-TEXT' : {
             return {...state, newPostText: action.payload.newPostText}
+        }
+        case 'GET-STATUS' : {
+            return {...state, status: action.payload.status}
+        }
+        case 'SET-STATUS' : {
+            return {...state, status: action.payload.status}
         }
         case 'ADD-POST' : {
             if (state.newPostText !== '') {
@@ -30,7 +37,8 @@ export const ProfileReducer = (state: ProfileType=InitialProfile, action: Action
         case 'SET-USER-PROFILE': {
             return {...state, profile: {...action.payload.userProfile}}
         }
-        default: return state
+        default:
+            return state
     }
 }
 
@@ -40,10 +48,45 @@ export const addCurrentPostText = (newPostText: string) => {
         payload: {newPostText}
     } as const
 }
+export const getStatusAC = (status: string) => {
+    return {
+        type: 'GET-STATUS',
+        payload: {status}
+    } as const
+}
 export const addPost = () => {
     return {
         type: 'ADD-POST'
     } as const
+}
+export const getStatusTC = (userId: string): ThunkType => {
+    return (dispatch: Dispatch) => {
+        dispatch(setIsLoadingAC(true))
+        ProfileAPI.getStatus(userId)
+            .then(res => {
+                dispatch(getStatusAC(res.data))
+                dispatch(setIsLoadingAC(false))
+            })
+    }
+}
+export const setStatusAC = (status: string) => {
+    return {
+        type: 'SET-STATUS',
+        payload: {status}
+    }as const
+}
+export const setStatusTC = (status: string): ThunkType => {
+    return (dispatch: Dispatch) => {
+        dispatch(setIsLoadingAC(true))
+        ProfileAPI.setStatus(status)
+            .then(res => {
+                console.log(res)
+                if (res.data.resultCode === 0){
+                    dispatch(setStatusAC(status))
+                }
+            })
+            .finally(()=>{dispatch(setIsLoadingAC(false))})
+    }
 }
 export const setUserProfileAC = (userProfile: UserProfileType) => {
     return {

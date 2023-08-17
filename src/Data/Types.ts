@@ -1,6 +1,6 @@
 import {addMessageAC, addMessageTextAC} from "./DialogsReducer";
 import {followAC, setCurrentPageAC, setIsLoadingAC, setUsersAC, setUsersTotalCountAC, unfollowAC} from "./UsersReducer";
-import {addCurrentPostText, addPost, setUserProfileAC} from "./ProfileReducer";
+import {addCurrentPostText, addPost, getStatusAC, setStatusAC, setUserProfileAC} from "./ProfileReducer";
 
 export type  ActionTypes =
     ReturnType<typeof addCurrentPostText>
@@ -14,7 +14,8 @@ export type  ActionTypes =
     | ReturnType<typeof setIsLoadingAC>
     | ReturnType<typeof setUserProfileAC>
     | ReturnType<typeof unfollowAC>
-
+    | ReturnType<typeof getStatusAC>
+    | ReturnType<typeof setStatusAC>
 
 export type Poststype = {
     id: string
@@ -25,6 +26,7 @@ export type ProfileType = {
     posts: Poststype[]
     newPostText: string
     profile: null | UserProfileType
+    status: string
 }
 export type DialogsType = {
     id: string
@@ -93,4 +95,10 @@ export type FollowPostResponceType = {
     resultCode: number
     messages: string[]
     data: {}
+}
+export type SetStatusResponceType<D={}> = {
+    data: D
+    fieldsError: string[]
+    messages: string[]
+    resultCode: number
 }
