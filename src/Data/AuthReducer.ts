@@ -8,23 +8,28 @@ export type InitialStateType = {
     email: null | string
     login: null | string
     isAuth: boolean
+    isInitialised: boolean
 }
 let initialState = {
     userId: null,
     email: null,
     login: null,
-    isAuth: false
+    isAuth: false,
+    isInitialised: false
 }
 export const AuthReducer = (state: InitialStateType = initialState, action: ActionTypes): InitialStateType => {
     switch (action.type) {
         case 'SET-USER-DATA' : {
-            return {...action.payload, isAuth: true}
+            return {isInitialised: false, ...action.payload, isAuth: true}
         }
         case 'ME-LOGIN' : {
             return {...state, ...action.payload, isAuth: true}
         }
         case "ME-LOGOUT": {
             return {...state, ...action.payload, isAuth: false}
+        }
+        case "SET-INIT": {
+            return {...state, isInitialised: true}
         }
         default:
             return state
@@ -44,10 +49,10 @@ export const setAuthUserDataTC = (): ThunkType => {
                     dispatch(setAuthUserDataAC(res.data.data.id, res.data.data.email, res.data.data.login))
                 }
             })
+            .finally(()=>{dispatch(setInitializedAC())})
     }
 }
 export const MeLoginAC = (email: string | null, password: string | null, rememberMe: boolean | null = false) => {
-
     return {
         type: 'ME-LOGIN',
         payload: {email, password, rememberMe}
@@ -78,4 +83,9 @@ export const MeLogoutTC = (): ThunkType => {
                 }
             })
     }
+}
+export const setInitializedAC = () => {
+    return {
+        type: 'SET-INIT'
+    } as const
 }

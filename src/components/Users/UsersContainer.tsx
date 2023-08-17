@@ -16,7 +16,6 @@ class UsersAPIComponent extends React.Component<UsersPropsType, UsersAPIType> {
     componentDidMount() {
         this.props.setUsersTC(this.props.pageSize, this.props.currentPage)
     }
-
     onPageChange = (pageNumber: number) => {
         this.props.setUsersTC(this.props.pageSize, pageNumber)
     }

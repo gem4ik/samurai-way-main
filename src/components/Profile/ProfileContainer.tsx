@@ -79,8 +79,8 @@ function mapDispatchToProps (dispatch: AppDispatch): mapDispatchToPropsType {
 }
 
 export default compose<React.ComponentType>(
-    withRouter,
     withAuthHOK,
+    withRouter,
     (connect(
             mapStateToProps,
             mapDispatchToProps

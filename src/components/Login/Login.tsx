@@ -3,6 +3,7 @@ import {connect} from "react-redux";
 import {AppDispatch, RootStateType} from "../../Data/redux";
 import {useFormik} from "formik";
 import {MeLoginTC} from "../../Data/AuthReducer";
+import {Redirect} from "react-router-dom";
 
 export type FormikErrorType = {
     email?: string
@@ -38,6 +39,10 @@ export const Login = (props: LoginPropsType) => {
         },
     })
 
+    // if(props.isAuth) {
+    //     return <Redirect to={'/profile'}/>
+    // }
+
     return <div>
         <h3>LOGIN</h3>
         <div>
@@ -72,9 +77,13 @@ export const Login = (props: LoginPropsType) => {
     </div>
 }
 type mapStateToPropsType = {
+    isAuth: boolean
 }
-const mapStateToProps = (state: RootStateType) => ({
-})
+const mapStateToProps =(state: RootStateType)=>{
+    return {
+        isAuth:state.auth.isAuth
+    }
+}
 type mapDispatchToPropsType = {
     loginTC: (email: string | null, password: string | null, rememberMe: boolean | null) => void
 }
